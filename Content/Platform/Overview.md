@@ -5,27 +5,101 @@ tags:
 - Messaging Platform 
 - Introduction
 - Overview
+- Service Oriented Architecture
+- SOA
+- Event-Driven Architecture
+- EDA
 ---
 
 
-## Overview of the Particular Software Messaging Platform
+# Overview of the Particular Software Messaging Platform
 
-### Introduction
+## Introduction
 
-### NServiceBus
+The Particular Software Messaging Platform is an integrated set of products and tools enabling you to develop, test and run distributed systems.
 
-### ServiceMatrix
+OK, but what does this actually mean ?
 
-### ServiceInsight
+Developing distributed applications and systems is hard. Really hard.
+Just think of all you need to do:
+* Envision and design the distributed system 
+* Create a POC
+* Demo it and communicate your intent to peers, managers and customers
+* Receive feedback and iterate to make sure you're on the right track
+* Add the business logic and your system's unique "secret sauce" 
+* Test and make sure it all fits together and working as planned 
+* Deploy to production and continuously monitor 
+* Track customer usage and handle any exceptions
+* Improve, fix, upgrade and update while making sure it all works flawlessly
 
-### ServicePulse
+This is quite a challenge, and although the industry has been making  progress, both in methodology and tooling, it still requires a steep learning curve and significant effort to master distributed systems development. 
 
-### ServiceControl
+**Our goal is simple: Make it fun, easy and fast to design, develop and run distributed systems.**
 
-### Getting Started
+[NServiceBus](http://particular.net/NServiceBus), the most popular and developer friendly service bus for .NET, has made it a lot easier to build  distributed systems. NServiceBus is used by more than 50,000 developers and customers, in a [wide range of business domains and company sizes](http://particular.net/customers). It is backed by a rock-solid [distributed development methodology](http://particular.net/adsd), an active and flourishing [worldwide community of experts, consultants and contributors](http://particular.net/champions) and supported by the [Particular Software support team](http://particular.net/support).     
 
-### Licensing
+The Particular Software Messaging Platform, developed by the makers of NServiceBus and using NServiceBus, takes distributed development to the next level of ease and efficiency:
+* A comprehensive set of tools supporting the entire lifecycle of distributed applications development
+* Following established best practices and methodological guidelines
+* Built for and using NServiceBus, the most popular Service Bus for the .NET environment
+* Supports a wide array of messaging transports (including MSMQ, RabbitMQ, ActiveMQ, SQL Server, Windows Azure Queues, Windows Azure Service Bus, WebsphereMQ and more)          
 
-### Support
+### TODO: add visual of platform
 
-### Additional Resources
+**Jump-start your system design and development with [ServiceMatrix](http://particular.net/ServiceMatrix)**: 
+ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes. Dramatically reducing the learning curve, POC effort and time-to-market.
+
+**Track, analyze and monitor your system's runtime behavior using [ServiceInsight](http://particular.net/ServiceInsight)**: 
+everything you want and need to know about your application. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - providing you with the information you must have. 
+
+**Monitor your system using [ServicePulse](http://particular.net/ServicePulse)**: 
+A real-time monitoring web application that is custom tailored to fit distributed applications in general, and your specific needs in particular. 
+
+**Customize the Particular Software platform to fit your needs and requirements**: 
+Use the variety of extensibility and customization options provided by each of the products and the Particular Software Platform as a whole. Backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption. 
+
+
+## NServiceBus
+
+
+* version 4.4 (mature etc.) 
+
+### Feature highlights
+
+* High performance and scalability
+* Reliable integration with automatic retries
+* Workflow and background task scheduling
+* Centralized auditing of all message flows
+* Publish/Subscribe support for reduced coupling
+* Replication-free for cross-site communication
+* Supports multiple transports, out-of-the-box
+* Easy to extend and configure
+* Runs on-prmise, in the Cloud, or in a hybrid scenario
+* Supports a wide range of messaging transports:
+   *  MSMQ
+   *  RabbitMQ
+   *  ActiveMQ
+   *  SQL Server
+   *  Windows Azure Queues
+   *  Windows Azure Service Bus
+   *  WebsphereMQ  
+* Extensible and easily customizable
+* Open-sourced 
+
+
+
+## ServiceMatrix
+
+## ServiceInsight
+
+## ServicePulse
+
+## ServiceControl
+
+## Getting Started
+
+## Licensing
+
+## Support
+
+## Additional Resources
