@@ -49,7 +49,7 @@ The Particular Software Messaging Platform, developed by the makers of NServiceB
 
 #### [ServiceMatrix](http://particular.net/ServiceMatrix): Jump-start your system design and development 
 
-ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes. Dramatically reducing the learning curve, POC effort and time-to-market.
+ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes, dramatically reducing the learning curve, POC effort and time-to-market.
 
 #### [ServiceInsight](http://particular.net/ServiceInsight): Track, analyze and monitor your system's runtime behavior
 
@@ -66,7 +66,7 @@ Use the variety of extensibility and customization options provided by each of t
 
 ## NServiceBus
 
-
+#### TODO: bla bla bla...
 * version 4.4 (mature etc.) 
 
 ### Feature highlights
@@ -89,11 +89,13 @@ Use the variety of extensibility and customization options provided by each of t
    *  Windows Azure Service Bus
    *  WebsphereMQ  
 * Extensible and easily customizable
-* Open-sourced 
+
 
 
 
 ## ServiceMatrix
+
+
 
 ## ServiceInsight
 
