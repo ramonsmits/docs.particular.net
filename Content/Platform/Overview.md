@@ -36,27 +36,28 @@ This is quite a challenge, and although the industry has been making  progress, 
 
 **Our goal is simple: Make it fun, easy and fast to design, develop and run distributed systems.**
 
-[NServiceBus](http://particular.net/NServiceBus), the most popular and developer friendly service bus for .NET, has made it a lot easier to build  distributed systems. NServiceBus is used by more than 50,000 developers and customers, in a [wide range of business domains and company sizes](http://particular.net/customers). It is backed by a rock-solid [distributed development methodology](http://particular.net/adsd), an active and flourishing [worldwide community of experts, consultants and contributors](http://particular.net/champions) and supported by the [Particular Software support team](http://particular.net/support).     
+[NServiceBus](http://particular.net/NServiceBus), the most popular and developer friendly service bus for .NET, has made it a lot easier to build  distributed systems. NServiceBus is used by more than 50,000 developers and customers, in a [wide range of business domains and company sizes](http://particular.net/customers). It is backed by a rock-solid [distributed development methodology](http://particular.net/adsd), an active and flourishing [worldwide community of experts, consultants and contributors](http://particular.net/champions) and supported by the [Particular Software team](http://particular.net/support).     
 
 The Particular Software Messaging Platform, developed by the makers of NServiceBus and using NServiceBus, takes distributed development to the next level of ease and efficiency:
 * A comprehensive set of tools supporting the entire lifecycle of distributed applications development
 * Following established best practices and methodological guidelines
 * Built for and using NServiceBus, the most popular Service Bus for the .NET environment
-* Supports a wide array of messaging transports (including MSMQ, RabbitMQ, ActiveMQ, SQL Server, Windows Azure Queues, Windows Azure Service Bus, WebsphereMQ and more)          
+* End-to-end Support for a wide array of messaging transports (including MSMQ, RabbitMQ, ActiveMQ, SQL Server, Windows Azure Queues, Windows Azure Service Bus, WebsphereMQ and more)          
 
-### TODO: add visual of platform
+![](/images/particular-software-platform.jpg "Particular Software Platform")
 
-#### Jump-start your system design and development with [ServiceMatrix](http://particular.net/ServiceMatrix): 
+
+#### [ServiceMatrix](http://particular.net/ServiceMatrix): Jump-start your system design and development 
 
 ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes. Dramatically reducing the learning curve, POC effort and time-to-market.
 
-#### Track, analyze and monitor your system's runtime behavior using [ServiceInsight](http://particular.net/ServiceInsight): 
+#### [ServiceInsight](http://particular.net/ServiceInsight): Track, analyze and monitor your system's runtime behavior
 
-Everything you want and need to know about your application. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - providing you with the information you must have. 
+Everything you want and need to know about your application. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - ServiceInsight provides you with the information you must have. 
 
-#### Monitor your system using [ServicePulse](http://particular.net/ServicePulse): 
+#### [ServicePulse](http://particular.net/ServicePulse): Integrated monitoring of your distributed system 
 
-A real-time monitoring web application that is custom tailored to fit distributed applications in general, and your specific needs in particular. 
+Real-time monitoring that is custom tailored to fit distributed applications in general, and *your application's* specific needs in particular.  
 
 #### Customize the Particular Software platform to fit your needs and requirements: 
 
