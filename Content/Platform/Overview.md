@@ -53,7 +53,7 @@ ServiceMatrix allows you to generate a fully functional skeleton of your distrib
 
 #### [ServiceInsight](http://particular.net/ServiceInsight): Track, analyze and monitor your system's runtime behavior
 
-Everything you want and need to know about your application. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - ServiceInsight provides you with the information you must have. 
+Everything you want and need to know about your messaging application behavior. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - ServiceInsight provides you with the information you must have. 
 
 #### [ServicePulse](http://particular.net/ServicePulse): Integrated monitoring of your distributed system 
 
@@ -61,7 +61,7 @@ Real-time monitoring that is custom tailored to fit distributed applications in 
 
 #### Customize the Particular Software platform to fit your needs and requirements: 
 
-Use the variety of extensibility and customization options provided by each of the products and the Particular Software Platform as a whole. Backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption. 
+Use the variety of extensibility and customization options provided by each of the Particular Software Platform products, backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption. 
 
 
 ## NServiceBus
