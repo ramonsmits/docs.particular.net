@@ -46,16 +46,20 @@ The Particular Software Messaging Platform, developed by the makers of NServiceB
 
 ### TODO: add visual of platform
 
-**Jump-start your system design and development with [ServiceMatrix](http://particular.net/ServiceMatrix)**: 
+#### Jump-start your system design and development with [ServiceMatrix](http://particular.net/ServiceMatrix): 
+
 ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes. Dramatically reducing the learning curve, POC effort and time-to-market.
 
-**Track, analyze and monitor your system's runtime behavior using [ServiceInsight](http://particular.net/ServiceInsight)**: 
-everything you want and need to know about your application. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - providing you with the information you must have. 
+#### Track, analyze and monitor your system's runtime behavior using [ServiceInsight](http://particular.net/ServiceInsight): 
 
-**Monitor your system using [ServicePulse](http://particular.net/ServicePulse)**: 
+Everything you want and need to know about your application. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - providing you with the information you must have. 
+
+#### Monitor your system using [ServicePulse](http://particular.net/ServicePulse): 
+
 A real-time monitoring web application that is custom tailored to fit distributed applications in general, and your specific needs in particular. 
 
-**Customize the Particular Software platform to fit your needs and requirements**: 
+#### Customize the Particular Software platform to fit your needs and requirements: 
+
 Use the variety of extensibility and customization options provided by each of the products and the Particular Software Platform as a whole. Backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption. 
 
 
