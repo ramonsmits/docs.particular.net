@@ -36,9 +36,7 @@ This is quite a challenge, and although the industry has been making  progress, 
 
 **Our goal is simple: Make it fun, easy and fast to design, develop and run distributed systems.**
 
-[NServiceBus](http://particular.net/NServiceBus), the most popular and developer friendly service bus for .NET, has made it a lot easier to build  distributed systems. NServiceBus is used by more than 50,000 developers and customers, in a [wide range of business domains and company sizes](http://particular.net/customers). It is backed by a rock-solid [distributed development methodology](http://particular.net/adsd), an active and flourishing [worldwide community of experts, consultants and contributors](http://particular.net/champions) and supported by the [Particular Software team](http://particular.net/support).     
-
-The Particular Software Messaging Platform, developed by the makers of NServiceBus and using NServiceBus, takes distributed development to the next level of ease and efficiency:
+The Particular Software Messaging Platform, developed by the makers of NServiceBus, the most popular and developer friendly service bus for .NET, takes distributed development to the next level of ease and efficiency:
 * A comprehensive set of tools supporting the entire lifecycle of distributed applications development
 * Following established best practices and methodological guidelines
 * Built for and using NServiceBus, the most popular Service Bus for the .NET environment
@@ -46,6 +44,9 @@ The Particular Software Messaging Platform, developed by the makers of NServiceB
 
 ![](/images/particular-software-platform.jpg "Particular Software Platform")
 
+#### [NServiceBus](http://particular.net/NServiceBus), the most popular and developer friendly service bus for .NET
+
+NServiceBus is used by more than 50,000 developers and customers, in a [wide range of business domains and company sizes](http://particular.net/customers). It is backed by a rock-solid [distributed development methodology](http://particular.net/adsd), an active and flourishing [worldwide community of experts, consultants and contributors](http://particular.net/champions) and supported by the [Particular Software team](http://particular.net/support). 
 
 #### [ServiceMatrix](http://particular.net/ServiceMatrix): Jump-start your system design and development 
 
@@ -64,10 +65,9 @@ Real-time monitoring that is custom tailored to fit distributed applications in 
 Use the variety of extensibility and customization options provided by each of the Particular Software Platform products, backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption. 
 
 
-## NServiceBus
+![](/images/nservicebus-logo.jpg "NServiceBus Logo")
 
-#### TODO: bla bla bla...
-* version 4.4 (mature etc.) 
+Provides enterprise-grade scalability and reliability for your workflows and integrations without any messy XML configuration - just pure-code bliss. Simple and easy publish/subscribe communication over any transport, on premise and in the cloud.
 
 ### Feature highlights
 
@@ -79,7 +79,7 @@ Use the variety of extensibility and customization options provided by each of t
 * Replication-free for cross-site communication
 * Supports multiple transports, out-of-the-box
 * Easy to extend and configure
-* Runs on-prmise, in the Cloud, or in a hybrid scenario
+* Runs on-premise, in the Cloud, or in a hybrid scenario
 * Supports a wide range of messaging transports:
    *  MSMQ
    *  RabbitMQ
@@ -88,18 +88,13 @@ Use the variety of extensibility and customization options provided by each of t
    *  Windows Azure Queues
    *  Windows Azure Service Bus
    *  WebsphereMQ  
-* Extensible and easily customizable
+
+## ![](/images/servicematrix-logo.jpg "ServiceMatrix Logo")
 
 
+## ![](/images/serviceinsight-logo.jpg "ServiceInsight Logo")
 
-
-## ServiceMatrix
-
-
-
-## ServiceInsight
-
-## ServicePulse
+## ![](/images/servicePulse-logo.jpg "ServicePulse Logo")
 
 ## ServiceControl
 
