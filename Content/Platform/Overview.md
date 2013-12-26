@@ -126,6 +126,16 @@ ServiceMatrix allows you to generate a fully functional skeleton of your distrib
 Everything you want and need to know about your messaging application behavior. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - ServiceInsight provides you with the information you must have. 
 
 
+![ServiceInsight](/images/serviceinsight-visual.jpg "ServiceInsight in action")
+
+
+#### Feature highlights
+
+
+
+#### Getting Started
+
+
 ## [![ServicePulse](/images/servicepulse-logo.jpg "ServicePulse")](http://particular.net/ServicePulse)
 
 ### Integrated monitoring of your distributed system 
