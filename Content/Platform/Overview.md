@@ -44,10 +44,6 @@ The Particular Software Messaging Platform, developed by the makers of NServiceB
 
 ![](/images/particular-software-platform.jpg "Particular Software Platform")
 
-#### [NServiceBus](http://particular.net/NServiceBus), the most popular and developer friendly service bus for .NET
-
-NServiceBus is used by more than 50,000 developers and customers, in a [wide range of business domains and company sizes](http://particular.net/customers). It is backed by a rock-solid [distributed development methodology](http://particular.net/adsd), an active and flourishing [worldwide community of experts, consultants and contributors](http://particular.net/champions) and supported by the [Particular Software team](http://particular.net/support). 
-
 #### [ServiceMatrix](http://particular.net/ServiceMatrix): Jump-start your system design and development 
 
 ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes, dramatically reducing the learning curve, POC effort and time-to-market.
@@ -65,11 +61,16 @@ Real-time monitoring that is custom tailored to fit distributed applications in 
 Use the variety of extensibility and customization options provided by each of the Particular Software Platform products, backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption. 
 
 
-![](/images/nservicebus-logo.jpg "NServiceBus Logo")
+[![NServicebus](/images/nservicebus-logo.jpg "NServiceBus Logo")]([NServiceBus](http://particular.net/NServiceBus)
 
-Provides enterprise-grade scalability and reliability for your workflows and integrations without any messy XML configuration - just pure-code bliss. Simple and easy publish/subscribe communication over any transport, on premise and in the cloud.
+### The most popular and developer friendly service bus for .NET
 
-### Feature highlights
+Enterprise-grade scalability and reliability for your workflows and integrations without any messy XML configuration - just pure-code bliss. Simple and easy publish/subscribe communication over any transport, on premise and in the cloud.
+
+NServiceBus is used by more than 50,000 developers and customers, in a [wide range of business domains and company sizes](http://particular.net/customers). It is backed by a rock-solid [distributed development methodology](http://particular.net/adsd), an active and flourishing [worldwide community of experts, consultants and contributors](http://particular.net/champions) and supported by the [Particular Software team](http://particular.net/support). 
+
+
+#### Feature highlights
 
 * High performance and scalability
 * Reliable integration with automatic retries
@@ -89,12 +90,12 @@ Provides enterprise-grade scalability and reliability for your workflows and int
    *  Windows Azure Service Bus
    *  WebsphereMQ  
 
-## ![](/images/servicematrix-logo.jpg "ServiceMatrix Logo")
+## ![ServiceMatrix](/images/servicematrix-logo.jpg "ServiceMatrix Logo")
 
 
-## ![](/images/serviceinsight-logo.jpg "ServiceInsight Logo")
+## ![ServiceInsight](/images/serviceinsight-logo.jpg "ServiceInsight Logo")
 
-## ![](/images/servicePulse-logo.jpg "ServicePulse Logo")
+## ![ServicePulse](/images/servicePulse-logo.jpg "ServicePulse Logo")
 
 ## ServiceControl
 
