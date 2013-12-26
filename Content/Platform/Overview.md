@@ -85,11 +85,27 @@ NServiceBus is used by more than 50,000 developers and customers, in a [wide ran
 * **[Code-first Step-by-step guide](http://docs.particular.net/nservicebus/NServiceBus-Step-by-Step-Guide)**: the starting point in the [NServiceBus documentation portal](docs.particular.net), covering NServiceBus features and usage patterns.     
 
 
-## [![ServiceMatrix](/images/servicematrix-logo.jpg "ServiceMatrix")](http://particular.net/ServiceMatrix)
+## [![ServiceMatrix](/images/servicematrix-logo.jpg "ServiceMatrix for Visual Studio")](http://particular.net/ServiceMatrix)
 
 ### Jump-start your system design and development 
 
 ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes, dramatically reducing the learning curve, POC effort and time-to-market.
+
+![ServiceMatrix](/images/servicematrix-visual.jpg "ServiceMatrix in Visual Studio")]
+
+#### Feature highlights
+
+* Use the Canvas design surface to "draw" your distributed application and have it up-and-running within a couple of minutes
+* Multiple visual perspectives: logical, design-time and runtime views of your system's behavior
+* Fully integrated with the Particular Software platform runtime analysis and monitoring tools 
+* Extensible and customizable code    
+* Easily grasp complex interactions:
+   * which components make up which services
+   * which contracts those services expose
+   * where messages are sent
+   * which events those messages cause
+   * which services are subscribed to those events
+
 
 
 ## [![ServiceInsight](/images/serviceinsight-logo.jpg "ServiceInsight")](http://particular.net/ServiceInsight)
