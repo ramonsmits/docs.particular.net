@@ -13,7 +13,7 @@ tags:
 
 [![NServicebus](/images/particular-software-logo.jpg "Particular Software Platform")](http://particular.net) 
 
-# Overview of the Particular Software Messaging Platform
+# Overview of the Particular Software Platform
 
 
 ## Introduction
