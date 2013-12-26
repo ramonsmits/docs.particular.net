@@ -44,26 +44,11 @@ The Particular Software Messaging Platform, developed by the makers of NServiceB
 
 ![](/images/particular-software-platform.jpg "Particular Software Platform")
 
-#### [ServiceMatrix](http://particular.net/ServiceMatrix): Jump-start your system design and development 
-
-ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes, dramatically reducing the learning curve, POC effort and time-to-market.
-
-#### [ServiceInsight](http://particular.net/ServiceInsight): Track, analyze and monitor your system's runtime behavior
-
-Everything you want and need to know about your messaging application behavior. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - ServiceInsight provides you with the information you must have. 
-
-#### [ServicePulse](http://particular.net/ServicePulse): Integrated monitoring of your distributed system 
-
-Real-time monitoring that is custom tailored to fit distributed applications in general, and *your application's* specific needs in particular.  
-
-#### Customize the Particular Software platform to fit your needs and requirements: 
-
-Use the variety of extensibility and customization options provided by each of the Particular Software Platform products, backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption. 
 
 
-[![NServicebus](/images/nservicebus-logo.jpg "NServiceBus Logo")]([NServiceBus](http://particular.net/NServiceBus)
+[![NServicebus](/images/nservicebus-logo.jpg "NServiceBus Logo")](http://particular.net/NServiceBus) 
 
-### The most popular and developer friendly service bus for .NET
+## The most popular and developer friendly service bus for .NET
 
 Enterprise-grade scalability and reliability for your workflows and integrations without any messy XML configuration - just pure-code bliss. Simple and easy publish/subscribe communication over any transport, on premise and in the cloud.
 
@@ -90,14 +75,34 @@ NServiceBus is used by more than 50,000 developers and customers, in a [wide ran
    *  Windows Azure Service Bus
    *  WebsphereMQ  
 
-## ![ServiceMatrix](/images/servicematrix-logo.jpg "ServiceMatrix Logo")
+
+[![ServiceMatrix](/images/servicematrix-logo.jpg "ServiceMatrix Logo")](http://particular.net/ServiceMatrix)
+
+## Jump-start your system design and development 
+
+ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes, dramatically reducing the learning curve, POC effort and time-to-market.
 
 
-## ![ServiceInsight](/images/serviceinsight-logo.jpg "ServiceInsight Logo")
+[![ServiceInsight](/images/serviceinsight-logo.jpg "ServiceInsight Logo")](http://particular.net/ServiceInsight)
 
-## ![ServicePulse](/images/servicePulse-logo.jpg "ServicePulse Logo")
+## Track, analyze and monitor your system's runtime behavior
 
-## ServiceControl
+Everything you want and need to know about your messaging application behavior. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - ServiceInsight provides you with the information you must have. 
+
+
+[![ServicePulse](/images/servicePulse-logo.jpg "ServicePulse Logo")](http://particular.net/ServicePulse)
+
+## Integrated monitoring of your distributed system 
+
+Real-time monitoring that is custom tailored to fit distributed applications in general, and *your application's* specific needs in particular.  
+
+
+## Customize the Particular Software platform to fit your needs and requirements: 
+
+Use the variety of extensibility and customization options provided by each of the Particular Software Platform products, backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption. 
+
+
+### ServiceControl
 
 ## Getting Started
 
