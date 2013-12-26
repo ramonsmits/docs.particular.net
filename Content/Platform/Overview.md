@@ -47,6 +47,9 @@ The Particular Software Messaging Platform, developed by the makers of NServiceB
 ## ![](/images/particular-software-platform.jpg "Particular Software Platform")
 
 
+
+
+
 ## [![NServicebus](/images/nservicebus-logo.jpg "NServiceBus")](http://particular.net/NServiceBus) 
 
 ### The most popular and developer friendly service bus for .NET
@@ -91,20 +94,28 @@ NServiceBus is used by more than 50,000 developers and customers, in a [wide ran
 
 ServiceMatrix allows you to generate a fully functional skeleton of your distributed application in a matter of minutes, dramatically reducing the learning curve, POC effort and time-to-market.
 
-![ServiceMatrix](/images/servicematrix-visual.jpg "ServiceMatrix in Visual Studio")]
+![ServiceMatrix](/images/servicematrix-visual.jpg "ServiceMatrix in Visual Studio")
 
 #### Feature highlights
 
-* Use the Canvas design surface to "draw" your distributed application and have it up-and-running within a couple of minutes
-* Multiple visual perspectives: logical, design-time and runtime views of your system's behavior
-* Fully integrated with the Particular Software platform runtime analysis and monitoring tools 
-* Extensible and customizable code    
-* Easily grasp complex interactions:
+* Design your distributed application on the Canvas surface, and have it up-and-running within minutes.
+* Multiple visual perspectives help you to easily grasp complex interactions:
    * which components make up which services
    * which contracts those services expose
    * where messages are sent
    * which events those messages cause
    * which services are subscribed to those events
+* Extensible and customizable code    
+* Supports all NServiceBus transports
+* Fully integrated with the Particular Software platform to provide runtime analysis and monitoring tools, OOTB. 
+
+#### Getting Started
+
+* **Introduction to ServiceMatrix** (5 mins video) (TODO)
+* **Hands-on-Labs** (TODO)
+* **Getting Started with ServiceMatrix** article (TODO)
+* **Extending ServiceMatrix generated code** article (TODO)
+
 
 
 
