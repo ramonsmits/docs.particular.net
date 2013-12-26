@@ -11,14 +11,14 @@ tags:
 - EDA
 ---
 
-[![NServicebus](/images/particular-software-logo.jpg "Particular Software Platform")](http://particular.net) 
+[![NServicebus](/images/particular-software-logo.jpg "Particular Service Platform")](http://particular.net) 
 
-# Overview of the Particular Software Platform
+# Overview of the Particular Service Platform
 
 
 ## Introduction
 
-The Particular Software Messaging Platform is an integrated set of products and tools enabling you to develop, test and run distributed systems.
+The Particular Service Platform is an integrated set of products and tools enabling you to develop, test, and run distributed systems.
 
 OK, but what does this actually mean ?
 
@@ -36,15 +36,15 @@ Just think of all you need to do:
 
 This is quite a challenge, and although the industry has been making  progress, both in methodology and tooling, it still requires a steep learning curve and significant effort to master distributed systems development. 
 
-**Our goal is simple: Make it fun, easy and fast to design, develop and run distributed systems.**
+**Our goal is simple: Make it fun (Udi:?), easy and fast to design, develop and run distributed systems.**
 
-The Particular Software Messaging Platform, developed by the makers of NServiceBus, the most popular and developer friendly service bus for .NET, takes distributed development to the next level of ease and efficiency:
+The Particular Service Platform, developed by the makers of NServiceBus, the most popular and developer friendly service bus for .NET, takes distributed development to the next level of ease and efficiency:
 * A comprehensive set of tools supporting the entire lifecycle of distributed applications development
 * Following established best practices and methodological guidelines
 * Built for and using NServiceBus, the most popular Service Bus for the .NET environment
 * End-to-end Support for a wide array of messaging transports (including MSMQ, RabbitMQ, ActiveMQ, SQL Server, Windows Azure Queues, Windows Azure Service Bus, WebsphereMQ and more)          
 
-## ![](/images/particular-software-platform.jpg "Particular Software Platform")
+## ![](/images/particular-software-platform.jpg "Particular Service Platform")
 
 
 
