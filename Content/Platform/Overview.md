@@ -11,8 +11,10 @@ tags:
 - EDA
 ---
 
+[![NServicebus](/images/particular-software-logo.jpg "Particular Software Platform")](http://particular.net) 
 
 # Overview of the Particular Software Messaging Platform
+
 
 ## Introduction
 
@@ -45,7 +47,7 @@ The Particular Software Messaging Platform, developed by the makers of NServiceB
 ## ![](/images/particular-software-platform.jpg "Particular Software Platform")
 
 
-## [![NServicebus](/images/nservicebus-logo.jpg "NServiceBus Logo")](http://particular.net/NServiceBus) 
+## [![NServicebus](/images/nservicebus-logo.jpg "NServiceBus")](http://particular.net/NServiceBus) 
 
 ### The most popular and developer friendly service bus for .NET
 
