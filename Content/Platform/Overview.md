@@ -74,6 +74,14 @@ NServiceBus is used by more than 50,000 developers and customers, in a [wide ran
    *  Windows Azure Service Bus
    *  WebsphereMQ  
 
+#### Getting Started
+
+* **[Download the Particular Software Platform](http://particular.net/downloads)**: the simplest, fastest way to get NServiceBus, the first 3 chapters "Learning NServiceBus" eBook for free, and the entire Particular Software platform,    
+* **[Online Hands-on-Labs](http://particular.net/HandsOnLabs)**: try NServiceBus in a full-featured virtual lab. Simple, fast and easy way to experience the NServiceBus development experience (no complex setup or installation required) 
+* **["Learning NServiceBus" by David Boike (Packt Publishing)](http://www.packtpub.com/build-distributed-software-systems-using-dot-net-enterprise-service-bus/book)**: Your Guide to Becoming a Messaging Expert. 
+"Learning NServiceBus" details the process of building a software system based on SOA principles. From sending a simple message to publishing events, David Boike shows you all you need to know to understand and implement an SOA-based message driven systems.
+* **[Code-first Step-by-step guide](http://docs.particular.net/nservicebus/NServiceBus-Step-by-Step-Guide)**: the starting point in the [NServiceBus documentation portal](docs.particular.net), covering NServiceBus features and usage patterns.     
+
 
 ## [![ServiceMatrix](/images/servicematrix-logo.jpg "ServiceMatrix")](http://particular.net/ServiceMatrix)
 
@@ -108,7 +116,7 @@ Use the variety of extensibility and customization options provided by each of t
 ## Getting Started
 
 * HOL
-* [Learning NServiceBus](http://www.packtpub.com/build-distributed-software-systems-using-dot-net-enterprise-service-bus/book)
+* 
 * Docu 
 
 ## Licensing
