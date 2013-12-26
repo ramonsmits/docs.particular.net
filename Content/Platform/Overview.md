@@ -137,9 +137,9 @@ Complete under-the-hood view of the your system's behavior, clearly displayed an
    * Saga usage, evolution and properties   
    * Endpoint interactions
    * Timing and performance
-* Full-text search, filter and sorting capabilities on all message headers, properties and body
+* Full-text search, filter and sorting capabilities on message headers, properties and body
 * Detailed error information with full stacktrace
-* Performance information for 
+* Detailed performance information  
 * Retry failed messages
 * Use Auto-Refresh to display near real-time updated information from across your distributed application
 * Supports all NServiceBus transports
