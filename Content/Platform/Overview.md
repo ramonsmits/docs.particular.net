@@ -121,9 +121,9 @@ ServiceMatrix allows you to generate a fully functional skeleton of your distrib
 
 ## [![ServiceInsight](/images/serviceinsight-logo.jpg "ServiceInsight")](http://particular.net/ServiceInsight)
 
-### Complete under-the-hood view of the your system's behavior
+### Essential insights for distributed solutions
 
-Everything you want and need to know about your messaging application behavior. Clearly displayed and visualized, immediately available and up-to-date. Whether it is in development, testing or production - ServiceInsight provides you with the information you must have. 
+Complete under-the-hood view of the your system's behavior, clearly displayed and visualized, immediately available and up-to-date. Whether in development, testing or production - ServiceInsight provides you with the information you must have. 
 
 
 ![ServiceInsight](/images/serviceinsight-visual.jpg "ServiceInsight in action")
@@ -131,6 +131,21 @@ Everything you want and need to know about your messaging application behavior. 
 
 #### Feature highlights
 
+* View all your endpoints, messages and interactions from a single screen
+* Insightful visualizations into your system behavior: 
+   * Message flow
+   * Saga usage, evolution and properties   
+   * Endpoint interactions
+   * Timing and performance
+* Full-text search, filter and sorting capabilities on all message headers, properties and body
+* Detailed error information with full stacktrace
+* Performance information for 
+* Retry failed messages
+* Use Auto-Refresh to display near real-time updated information from across your distributed application
+* Fully Integrated with the Particular Software Platform:
+   * Enhances ServiceMatrix to view your design's runtime behavior, on-the-fly and in realtime. 
+   * Launch from ServicePulse to gain insights and analyze failed messages context and root cause
+   * Share data and communicate with colleagues using Message URI's  
 
 
 #### Getting Started
