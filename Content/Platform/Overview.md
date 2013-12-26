@@ -104,20 +104,12 @@ Everything you want and need to know about your messaging application behavior. 
 Real-time monitoring that is custom tailored to fit distributed applications in general, and *your application's* specific needs in particular.  
 
 
+## ![ServiceControl](/images/servicecontrol-logo.jpg "ServiceControl")
 
+### Develop, customize and extend the Particular Software platform to fit your needs and requirements 
 
-### Customize the Particular Software platform to fit your needs and requirements 
+Use the variety of extensibility and customization options provided by each of the Particular Software Platform products, backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption.  
 
-Use the variety of extensibility and customization options provided by each of the Particular Software Platform products, backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption. 
-
-
-### ServiceControl
-
-## Getting Started
-
-* HOL
-* 
-* Docu 
 
 ## Licensing
 
