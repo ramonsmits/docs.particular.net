@@ -142,6 +142,7 @@ Complete under-the-hood view of the your system's behavior, clearly displayed an
 * Performance information for 
 * Retry failed messages
 * Use Auto-Refresh to display near real-time updated information from across your distributed application
+* Supports all NServiceBus transports
 * Fully Integrated with the Particular Software Platform:
    * Enhances ServiceMatrix to view your design's runtime behavior, on-the-fly and in realtime. 
    * Launch from ServicePulse to gain insights and analyze failed messages context and root cause
@@ -150,6 +151,9 @@ Complete under-the-hood view of the your system's behavior, clearly displayed an
 
 #### Getting Started
 
+* **Introduction to ServiceInsight** (5 mins video) [Requires update]
+* **Getting Started with ServiceInsight** article (TODO)
+* **HOL** (?) 
 
 ## [![ServicePulse](/images/servicepulse-logo.jpg "ServicePulse")](http://particular.net/ServicePulse)
 
@@ -158,15 +162,39 @@ Complete under-the-hood view of the your system's behavior, clearly displayed an
 Real-time monitoring that is custom tailored to fit distributed applications in general, and *your application's* specific needs in particular.  
 
 
-## ![ServiceControl](/images/servicecontrol-logo.jpg "ServiceControl")
+![ServicePulse](/images/servicepulse-visual.jpg "ServicePulse")
 
-### Develop, customize and extend the Particular Software platform to fit your needs and requirements 
 
-Use the variety of extensibility and customization options provided by each of the Particular Software Platform products, backed by a community of dedicated experts, developers, consultants, trainers, years of experience and wide adoption.  
+#### Feature Highlights
+
+* Multiple built-in and customizable Indicators:
+   * Active Endpoint heartbeat monitoring and notifications
+   * Failed Messages notifications and details
+   * Customized validation of your system's health using  Custom Checks 
+* Retry	failed messages
+* Tight integration with ServiceInsight for advanced context visualization and data
+* Supports all NServiceBus transports
+* Fully Integrated with the Particular Software Platform:
+* Near real-time status updates (using SignalR)
+* Accessible from any modern browser and device
+* Extensible and customizable
+* Full set of REST API exposed for custom development
+   
+
+#### Getting Started
+
+* **Introduction to ServicePulse** (5 mins video) [Requires update]
+* **Getting Started with ServicePulse** article (TODO)
+* **Howto: Author Custom Checks for ServicePulse** article (TODO)
+* **Configuring NServiceBus Endpoints for Monitoring by ServicePulse** article (TODO)
+* **Introduction to the ServicePulse HTTP API (ServiceControl)** article (TODO)
+* **HOL** (?) 
 
 
 ## Licensing
 
+TODO
+
 ## Support
 
-
+TODO
