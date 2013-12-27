@@ -56,7 +56,7 @@ The Particular Service Platform, developed by the makers of NServiceBus, takes d
 
 Enterprise-grade scalability and reliability for your workflows and integrations without any messy XML configuration - just pure-code bliss. Simple and easy publish/subscribe communication over any transport, on premise and in the cloud.
 
-More than 50,000 developers worldwide from a [wide range of business domains and company sizes](http://particular.net/customers) rely on NServiceBus every day. It is backed by a rock-solid [distributed development methodology](http://particular.net/adsd), a [worldwide community of experts, consultants and contributors](http://particular.net/champions) and is supported by the [Particular Software team](http://particular.net/support). 
+More than 50,000 developers worldwide from a [wide range of business domains and company sizes](http://particular.net/customers) rely on NServiceBus every day. It is backed by a rock-solid [distributed development methodology](http://particular.net/adsd), [a worldwide community of experts, consultants and contributors](http://particular.net/champions) and is supported by the [Particular Software team](http://particular.net/support). 
 
 
 #### Product Highlights
