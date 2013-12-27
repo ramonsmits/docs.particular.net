@@ -36,7 +36,7 @@ Just think of all you need to do:
 
 This is quite a challenge and, though the industry has been making  progress in methodology and tooling, it still requires a steep learning curve and significant effort to master distributed systems development. 
 
-**Our goal is simple: To make designing, developing and running distributed systems fun (Udi:?), easy and fast.**
+**Our goal is simple: To make designing, developing and running distributed systems fun, easy and fast.**
 
 The Particular Service Platform, developed by the makers of NServiceBus, takes distributed development to the next level of ease and efficiency by:
 * Supporting the entire lifecycle of distributed applications development with a comprehensive set of tools 
