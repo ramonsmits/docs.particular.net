@@ -52,7 +52,7 @@ The Particular Service Platform, developed by the makers of NServiceBus, takes d
 
 ## [![NServicebus](/images/nservicebus-logo.jpg "NServiceBus")](http://particular.net/NServiceBus) 
 
-### The most popular and developer friendly service bus for .NET
+### The most developer-friendly service bus for .NET
 
 Enterprise-grade scalability and reliability for your workflows and integrations without any messy XML configuration - just pure-code bliss. Simple and easy publish/subscribe communication over any transport, on premise and in the cloud.
 
