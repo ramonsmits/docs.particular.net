@@ -1,5 +1,5 @@
 ---
-title: Overview of the Particular Software Messaging Platform
+title: Overview of the Particular Service Platform
 summary: 'An introduction to the platform, its tools and products, including NServiceBus, ServiceMatrix, ServicePulse and ServiceInsight'
 tags:
 - Messaging Platform 
