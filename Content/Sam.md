@@ -1,1 +1,1 @@
-### Sam - do not be afraid of GitHub!!!
+**Sam** - do not be *afraid* of GitHub!!!
