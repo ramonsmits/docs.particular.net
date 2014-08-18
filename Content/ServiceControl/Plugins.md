@@ -7,7 +7,7 @@ tags:
 
 ServiceControl is the activity information backend service for ServiceInsight, ServicePulse, and third-party developments. It collects information from monitored NServicBus endpoints, stores this information in a dedicated database, and exposes this information for consumption by various clients via HTTP API.
 
-**Note:** When ServiceControl is introduced into an existing environment the standard behavior of error and audit queues will change. When ServiceControl is not monitoring the environment failed messages will remain in the configured error queue and audit messages in the configured audit queue, as soon as ServiceControl is installed and configured messages, in both queues, will be moved into the ServiceControl database.
+**Note:** When ServiceControl is introduced into an existing environment the standard behavior of error and audit queues will change. When ServiceControl is not monitoring the environment failed messages will remain in the configured error queue and audit messages in the configured audit queue, as soon as ServiceControl is installed and configured messages, in both queues, will be moved into the ServiceControl database. This behavior is detailed in the [Error Log and Audit Log behavior](/servicecontrol/errorlog-auditlog-behavior) article, that also details how to handle scenarios in which the system relyes on the error and audit queues to work properly.
 
 Plugins collect information from NServiceBus and can be deployed with each NServiceBus endpoint. 
 These plugins are optional from the perspective of the NServiceBus framework itself (they are not required by the endpoint), but they are required in order to collect the information that enables ServiceControl (and its clients) to provide the relevant functionality for each plugin.
@@ -23,6 +23,8 @@ The ServiceControl plugins can be downloaded and installed from the NuGet galler
 |Custom Checks|http://www.nuget.org/packages/ServiceControl.Plugin.CustomChecks|
 |Saga Audit|http://www.nuget.org/packages/ServiceControl.Plugin.SagaAudit|
 |Debug Session|http://www.nuget.org/packages/ServiceControl.Plugin.DebugSession|
+
+For NServiceBus V3 Endpoints plugins are currently in pre-release, more details can be found in the [How to configure endpoints for monitoring by ServicePulse](/ServicePulse/how-to-configure-endpoints-for-monitoring) article.
 
 
 ## Installing and Deploying
