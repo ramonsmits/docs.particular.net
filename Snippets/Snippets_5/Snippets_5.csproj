@@ -248,6 +248,7 @@
     <Content Include="SecondLevelRetries\app.config.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Transports\Mqmq\AppConfig.xml" />
     <None Include="Audit\App.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
