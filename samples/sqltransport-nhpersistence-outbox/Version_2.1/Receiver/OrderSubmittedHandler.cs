@@ -16,8 +16,6 @@ namespace Receiver
         {
             Console.WriteLine("Order {0} worth {1} submitted", message.OrderId, message.Value);
 
-            #region StoreUserData
-
             using (ISession session = Program.SessionFactory.OpenSession())
             using (ITransaction tx = session.BeginTransaction())
             {
@@ -29,25 +27,15 @@ namespace Receiver
                 tx.Commit();
             }
 
-            #endregion
-
-            #region Reply
-
-            Bus.Reply(new OrderAccepted
+			Bus.Reply(new OrderAccepted
                       {
                           OrderId = message.OrderId,
                       });
-
-            #endregion
-
-            #region Chaos
 
             if (ChaosGenerator.Next(2) == 0)
             {
                 throw new Exception("Boom!");
             }
-
-            #endregion
         }
     }
 }
