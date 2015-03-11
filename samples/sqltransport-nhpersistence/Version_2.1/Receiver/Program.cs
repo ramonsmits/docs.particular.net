@@ -1,51 +1,58 @@
 ﻿namespace Receiver
 {
-    using System;
-    using NHibernate.Cfg;
-    using NHibernate.Dialect;
-    using NHibernate.Mapping.ByCode;
-    using NHibernate.Tool.hbm2ddl;
-    using NServiceBus;
-    using NServiceBus.Persistence;
-    using NServiceBus.Transports.SQLServer;
+	using System;
+	using NHibernate.Cfg;
+	using NHibernate.Dialect;
+	using NHibernate.Mapping.ByCode;
+	using NHibernate.Tool.hbm2ddl;
+	using NServiceBus;
+	using NServiceBus.Persistence;
+	using NServiceBus.Transports.SQLServer;
 
-    class Program
-    {
-        static void Main()
-        {
-            Configuration hibernateConfig = new Configuration();
-            hibernateConfig.DataBaseIntegration(x =>
-            {                
-                x.ConnectionStringName = "NServiceBus/Persistence";
-                x.Dialect<MsSql2012Dialect>();
-            });
-            #region NHibernate
-            hibernateConfig.SetProperty("default_schema", "receiver");
-            #endregion
+	class Program
+	{
+		static void Main()
+		{
+			Console.Title = "Receiver";
 
-            ModelMapper mapper = new ModelMapper();
-            mapper.AddMapping<OrderMap>();
-            hibernateConfig.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
+			Configuration hibernateConfig = new Configuration();
 
-            new SchemaExport(hibernateConfig).Execute(false, true, false);
+			hibernateConfig.DataBaseIntegration(x =>
+			{
+				x.ConnectionStringName = "NServiceBus/Persistence";
+				x.Dialect<MsSql2012Dialect>();
+			});
 
-            #region ReceiverConfiguration
-            
-            BusConfiguration busConfig = new BusConfiguration();
-            busConfig.UseTransport<SqlServerTransport>().DefaultSchema("receiver")
-                .UseSpecificConnectionInformation(endpoint =>
-                {
-                    string schema = endpoint.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries)[0].ToLowerInvariant();
-                    return ConnectionInfo.Create().UseSchema(schema);
-                });
-            busConfig.UsePersistence<NHibernatePersistence>().UseConfiguration(hibernateConfig);
-            #endregion
+			hibernateConfig
+				.SetProperty("default_schema", "receiver");
 
-            using (Bus.Create(busConfig).Start())
-            {
-                Console.WriteLine("Press <enter> to exit");
-                Console.ReadLine();
-            }
-        }
-    }
+			ModelMapper mapper = new ModelMapper();
+			mapper.AddMapping<OrderMap>();
+			hibernateConfig.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
+
+			new SchemaExport(hibernateConfig).Execute(false, true, false);
+
+
+			BusConfiguration busConfig = new BusConfiguration();
+			busConfig
+				.UseTransport<SqlServerTransport>()
+				.DefaultSchema("receiver")
+				.UseSpecificConnectionInformation(endpoint =>
+				{
+					string schema = endpoint.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)[0].ToLowerInvariant();
+					return ConnectionInfo.Create().UseSchema(schema);
+				})
+				;
+			busConfig
+				.UsePersistence<NHibernatePersistence>()
+				.UseConfiguration(hibernateConfig)
+				;
+
+			using (Bus.Create(busConfig).Start())
+			{
+				Console.WriteLine("Press <enter> to exit");
+				Console.ReadLine();
+			}
+		}
+	}
 }

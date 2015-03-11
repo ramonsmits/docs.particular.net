@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Messages;
 using NServiceBus;
@@ -6,33 +6,43 @@ using NServiceBus.Transports.SQLServer;
 
 namespace Sender
 {
-    class Program
-    {
-        static void Main()
-        {
-            const string letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
-            Random random = new Random();
-            BusConfiguration busConfig = new BusConfiguration();
+	class Program
+	{
+		static void Main()
+		{
+			Console.Title = "Sender";
+			const string letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+			Random random = new Random();
+			BusConfiguration busConfig = new BusConfiguration();
 
-            #region SenderConfiguration
-            busConfig.UseTransport<SqlServerTransport>().DefaultSchema("sender")
-                .UseSpecificConnectionInformation(EndpointConnectionInfo.For("receiver").UseSchema("receiver"));
-            busConfig.UsePersistence<NHibernatePersistence>();
-            #endregion
+			busConfig
+				.UseTransport<SqlServerTransport>()
+				.DefaultSchema("sender")
+				.UseSpecificConnectionInformation(
+					EndpointConnectionInfo
+						.For("receiver")
+						.UseSchema("receiver")
+					)
+				;
 
-            IBus bus = Bus.Create(busConfig).Start();
-            while (true)
-            {
-                Console.WriteLine("Press <enter> to send a message");
-                Console.ReadLine();
+			busConfig
+				.UsePersistence<NHibernatePersistence>();
 
-                string orderId = new string(Enumerable.Range(0,4).Select(x => letters[random.Next(letters.Length)]).ToArray());
-                bus.Publish(new OrderSubmitted
-                {
-                    OrderId = orderId,
-                    Value = random.Next(100)
-                });
-            }
-        }
-    }
+			using (IBus bus = Bus.Create(busConfig).Start())
+			{
+				while (true)
+				{
+					Console.WriteLine("Press <enter> to send a message");
+					Console.ReadLine();
+
+					string orderId = new string(Enumerable.Range(0, 4).Select(x => letters[random.Next(letters.Length)]).ToArray());
+					bus.Publish(new OrderSubmitted
+					{
+						OrderId = orderId,
+						Value = random.Next(100)
+					});
+				}
+			}
+		}
+	}
 }
