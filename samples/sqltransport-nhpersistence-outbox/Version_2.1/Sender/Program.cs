@@ -13,13 +13,9 @@ namespace Sender
             Random random = new Random();
             BusConfiguration busConfig = new BusConfiguration();
 
-            #region SenderConfiguration
-
             busConfig.UseTransport<SqlServerTransport>();
             busConfig.UsePersistence<NHibernatePersistence>();
             busConfig.EnableOutbox();
-
-            #endregion
 
             IBus bus = Bus.Create(busConfig).Start();
             while (true)
