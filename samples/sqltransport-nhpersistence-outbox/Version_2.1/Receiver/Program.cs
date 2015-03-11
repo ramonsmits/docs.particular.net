@@ -7,10 +7,12 @@ using NHibernate.Tool.hbm2ddl;
 using NServiceBus;
 using NServiceBus.Features;
 using NServiceBus.Transports.SQLServer;
-using Configuration = NHibernate.Cfg.Configuration;
 
 namespace Receiver
 {
+	using System.Configuration;
+	using Configuration = NHibernate.Cfg.Configuration;
+
 	class Program
 	{
 		public static ISessionFactory SessionFactory;
@@ -23,6 +25,7 @@ namespace Receiver
 				x.ConnectionStringName = "NServiceBus/Persistence";
 				x.Dialect<MsSql2012Dialect>();
 			});
+
 			ModelMapper mapper = new ModelMapper();
 			mapper.AddMapping<OrderMap>();
 			hibernateConfig.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
@@ -31,13 +34,9 @@ namespace Receiver
 			new SchemaExport(hibernateConfig).Execute(false, true, false);
 
 			BusConfiguration busConfig = new BusConfiguration();
-			busConfig.UseTransport<SqlServerTransport>().UseSpecificConnectionInformation(
-				EndpointConnectionInfo.For("sender")
-					.UseConnectionString(@"Data Source=.\SQLEXPRESS;Initial Catalog=sender;Integrated Security=True"));
-
+			busConfig.UseTransport<SqlServerTransport>();
 			busConfig.UsePersistence<NHibernatePersistence>();
 			busConfig.EnableOutbox();
-
 			busConfig.DisableFeature<SecondLevelRetries>();
 
 			using (Bus.Create(busConfig).Start())
