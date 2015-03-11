@@ -1,0 +1,10 @@
+﻿CREATE DATABASE shared
+GO
+USE shared
+GO
+CREATE SCHEMA receiver
+GO
+CREATE SCHEMA sender
+GO
+CREATE SCHEMA error
+GO
