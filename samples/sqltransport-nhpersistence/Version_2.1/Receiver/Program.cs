@@ -23,8 +23,8 @@
 				x.Dialect<MsSql2012Dialect>();
 			});
 
-			hibernateConfig
-				.SetProperty("default_schema", "receiver");
+			//hibernateConfig
+			//	.SetProperty("default_schema", "receiver");
 
 			ModelMapper mapper = new ModelMapper();
 			mapper.AddMapping<OrderMap>();
@@ -36,12 +36,12 @@
 			BusConfiguration busConfig = new BusConfiguration();
 			busConfig
 				.UseTransport<SqlServerTransport>()
-				.DefaultSchema("receiver")
-				.UseSpecificConnectionInformation(endpoint =>
-				{
-					string schema = endpoint.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)[0].ToLowerInvariant();
-					return ConnectionInfo.Create().UseSchema(schema);
-				})
+				//.DefaultSchema("receiver")
+				//.UseSpecificConnectionInformation(endpoint =>
+				//{
+				//	string schema = endpoint.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)[0].ToLowerInvariant();
+				//	return ConnectionInfo.Create().UseSchema(schema);
+				//})
 				;
 			busConfig
 				.UsePersistence<NHibernatePersistence>()

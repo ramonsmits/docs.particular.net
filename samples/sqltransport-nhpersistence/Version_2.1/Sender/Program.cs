@@ -17,12 +17,12 @@ namespace Sender
 
 			busConfig
 				.UseTransport<SqlServerTransport>()
-				.DefaultSchema("sender")
-				.UseSpecificConnectionInformation(
-					EndpointConnectionInfo
-						.For("receiver")
-						.UseSchema("receiver")
-					)
+				//.DefaultSchema("sender")
+				//.UseSpecificConnectionInformation(
+				//	EndpointConnectionInfo
+				//		.For("receiver")
+				//		.UseSchema("receiver")
+				//	)
 				;
 
 			busConfig
