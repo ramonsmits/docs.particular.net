@@ -38,7 +38,7 @@ namespace Receiver
 			busConfig.UseTransport<SqlServerTransport>();
 			busConfig.UsePersistence<NHibernatePersistence>();
 			busConfig.EnableOutbox();
-			busConfig.DisableFeature<SecondLevelRetries>();
+			//busConfig.DisableFeature<SecondLevelRetries>();
 
 			using (Bus.Create(busConfig).Start())
 			{
