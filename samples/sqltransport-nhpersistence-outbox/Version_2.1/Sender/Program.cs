@@ -9,7 +9,8 @@ namespace Sender
     {
         static void Main()
         {
-            const string letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+			Console.Title("Sender");
+			const string letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
             Random random = new Random();
             BusConfiguration busConfig = new BusConfiguration();
 

@@ -19,6 +19,7 @@ namespace Receiver
 
 		static void Main()
 		{
+			Console.Title("Receiver");
 			Configuration hibernateConfig = new Configuration();
 			hibernateConfig.DataBaseIntegration(x =>
 			{
