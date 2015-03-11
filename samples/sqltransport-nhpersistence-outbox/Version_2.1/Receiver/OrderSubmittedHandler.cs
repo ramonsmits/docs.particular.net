@@ -14,6 +14,7 @@ namespace Receiver
 
         public void Handle(OrderSubmitted message)
         {
+	        int chaos = ChaosGenerator.Next(3);
             Console.WriteLine("Order {0} worth {1} submitted", message.OrderId, message.Value);
 
             using (ISession session = Program.SessionFactory.OpenSession())
@@ -24,7 +25,11 @@ namespace Receiver
                                  OrderId = message.OrderId,
                                  Value = message.Value
                              });
-                tx.Commit();
+				if (chaos == 1)
+				{
+					throw new Exception("Database Boom!");
+				}
+				tx.Commit();
             }
 
 			Bus.Reply(new OrderAccepted
@@ -32,9 +37,9 @@ namespace Receiver
                           OrderId = message.OrderId,
                       });
 
-            if (ChaosGenerator.Next(2) == 0)
+            if (chaos == 2)
             {
-                throw new Exception("Boom!");
+                throw new Exception("Finished Boom!");
             }
         }
     }
