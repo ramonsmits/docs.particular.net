@@ -2,43 +2,52 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using NServiceBus;
 
 class Program
 {
+    private const string connectionString =@"Data Source=(localdb)\v11.0;Initial Catalog=Samples.SqlIntegration;Integrated Security=True";
+    public static CountdownEvent x;
+
     static void Main()
     {
         #region EndpointConfiguration
         BusConfiguration busConfiguration = new BusConfiguration();
 
         busConfiguration.UseTransport<SqlServerTransport>()
-            .ConnectionString(@"Data Source=.\SQLEXPRESS;Initial Catalog=samples;Integrated Security=True");
+            .ConnectionString(connectionString);
         busConfiguration.EndpointName("Samples.SqlServer.NativeIntegration");
         busConfiguration.UseSerialization<JsonSerializer>();
         #endregion
         busConfiguration.UsePersistence<InMemoryPersistence>();
+        busConfiguration.EnableInstallers();
 
+        const BatchCount = 1000;
+        x = new System.Threading.CountdownEvent(BatchCount);
         using (Bus.Create(busConfiguration).Start())
         {
 
             Console.WriteLine("Press enter to send a message");
-            Console.WriteLine("Press any key to exit");
+            Console.WriteLine("Press ESC key to exit");
 
             while (true)
             {
-                ConsoleKeyInfo key = Console.ReadKey();
-                Console.WriteLine();
-
-                if (key.Key != ConsoleKey.Enter)
+                Parallel.For(0, BatchCount, i =>
                 {
-                    return;
-                }
-                PlaceOrder();
+                    PlaceOrder();
+                });
 
+                x.Wait();
+                x.Reset(BatchCount);
+                Console.WriteLine("Refilling queue, CTRL+C to quit.");
             }
 
         }
     }
+
+    private static int _orderId;
 
     static void PlaceOrder()
     {
@@ -46,15 +55,14 @@ class Program
 
         string message = @"{
                                $type: 'PlaceOrder',
-                               OrderId: 'Order from ADO.net sender'
+                               OrderId: '" + System.Threading.Interlocked.Increment(ref _orderId) + @"'
                             }";
 
         #endregion
 
         #region SendingUsingAdoNet
 
-        string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=samples;Integrated Security=True";
-        using (SqlConnection connection = new SqlConnection(connectionString))
+         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
 
