@@ -8,42 +8,45 @@ using NServiceBus;
 
 class Program
 {
-    private const string connectionString =@"Data Source=(localdb)\v11.0;Initial Catalog=Samples.SqlIntegration;Integrated Security=True";
-    public static CountdownEvent x;
+    private const string connectionString = @"Data Source=(localdb)\v11.0;Initial Catalog=Samples.SqlIntegration;Integrated Security=True";
+    public static CountdownEvent batchFinished;
 
-    static void Main()
+    private static void Main()
     {
         #region EndpointConfiguration
+
         BusConfiguration busConfiguration = new BusConfiguration();
 
         busConfiguration.UseTransport<SqlServerTransport>()
             .ConnectionString(connectionString);
         busConfiguration.EndpointName("Samples.SqlServer.NativeIntegration");
         busConfiguration.UseSerialization<JsonSerializer>();
+
         #endregion
+
         busConfiguration.UsePersistence<InMemoryPersistence>();
         busConfiguration.EnableInstallers();
 
-        const BatchCount = 1000;
-        x = new System.Threading.CountdownEvent(BatchCount);
-        using (Bus.Create(busConfiguration).Start())
+        const int BatchCount = 1000;
+
+        using (batchFinished = new CountdownEvent(BatchCount))
         {
-
-            Console.WriteLine("Press enter to send a message");
-            Console.WriteLine("Press ESC key to exit");
-
-            while (true)
+            using (Bus.Create(busConfiguration).Start())
             {
-                Parallel.For(0, BatchCount, i =>
+                Console.WriteLine("Press CTRL+C to exit");
+
+                while (true)
                 {
-                    PlaceOrder();
-                });
+                    Parallel.For(0, BatchCount, i =>
+                    {
+                        PlaceOrder();
+                    });
 
-                x.Wait();
-                x.Reset(BatchCount);
-                Console.WriteLine("Refilling queue, CTRL+C to quit.");
+                    batchFinished.Wait();
+                    batchFinished.Reset(BatchCount);
+                    Console.WriteLine("Refilling queue, CTRL+C to quit.");
+                }
             }
-
         }
     }
 
@@ -62,7 +65,7 @@ class Program
 
         #region SendingUsingAdoNet
 
-         using (SqlConnection connection = new SqlConnection(connectionString))
+        using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
 
