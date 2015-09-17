@@ -2,7 +2,7 @@ using System;
 using NServiceBus;
 using NHibernate;
 
-public class OrderSubmittedHandler : IHandleMessages<OrderSubmitted>
+public class OrderSubmittedHandler : IHandleMessages<SubmitOrder>
 {
     IBus bus;
     ISession session;
@@ -13,27 +13,22 @@ public class OrderSubmittedHandler : IHandleMessages<OrderSubmitted>
         this.session = session;
     }
 
-    public void Handle(OrderSubmitted message)
+    public void Handle(SubmitOrder message)
     {
-        Console.WriteLine("Order {0} worth {1} submitted", message.OrderId, message.Value);
+        //Console.WriteLine("Order {0} worth {1} submitted", message.OrderId, message.Value);
 
-        #region StoreUserData
+        Program.X.Signal();
 
-        session.Save(new Order
-        {
-            OrderId = message.OrderId,
-            Value = message.Value
-        });
+        //session.SaveOrUpdate(new Order
+        //{
+        //    OrderId = message.OrderId,
+        //    Value = message.Value
+        //});
 
-        #endregion
+        //bus.Reply(new OrderAccepted
+        //{
+        //    OrderId = message.OrderId,
+        //});
 
-        #region Reply
-
-        bus.Reply(new OrderAccepted
-        {
-            OrderId = message.OrderId,
-        });
-
-        #endregion
     }
 }

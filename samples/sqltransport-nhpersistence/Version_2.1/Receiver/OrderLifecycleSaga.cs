@@ -20,6 +20,6 @@ public class OrderLifecycleSaga : Saga<OrderLifecycleSagaData>,
 
     public void Timeout(OrderTimeout state)
     {
-        Console.WriteLine("Got timeout");
+        //Console.WriteLine("Got timeout");
     }
 }

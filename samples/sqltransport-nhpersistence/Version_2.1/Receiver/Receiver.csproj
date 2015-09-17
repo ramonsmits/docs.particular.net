@@ -64,22 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Order.cs" />
-    <Compile Include="OrderLifecycleSaga.cs" />
-    <Compile Include="OrderLifecycleSagaData.cs" />
-    <Compile Include="OrderMap.cs" />
     <Compile Include="OrderSubmittedHandler.cs" />
     <Compile Include="OrderTimeout.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="SubmitOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Messages\Shared.csproj">
-      <Project>{BF92D39E-42F6-44E9-8F7F-819993235621}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
