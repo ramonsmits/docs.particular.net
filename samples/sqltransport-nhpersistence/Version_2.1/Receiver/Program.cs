@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Mapping.ByCode;
+using NHibernate.Mapping.ByCode.Impl;
 using NHibernate.Tool.hbm2ddl;
 using NServiceBus;
 using NServiceBus.Persistence;
@@ -9,54 +14,82 @@ using NServiceBus.Transports.SQLServer;
 
 class Program
 {
+    public static CountdownEvent X;
+
     static void Main()
     {
-        Configuration hibernateConfig = new Configuration();
-        hibernateConfig.DataBaseIntegration(x =>
-        {
-            x.ConnectionStringName = "NServiceBus/Persistence";
-            x.Dialect<MsSql2012Dialect>();
-        });
-
-        #region NHibernate
-
-        hibernateConfig.SetProperty("default_schema", "receiver");
-
-        #endregion
-
-        ModelMapper mapper = new ModelMapper();
-        mapper.AddMapping<OrderMap>();
-        hibernateConfig.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
-
-        new SchemaExport(hibernateConfig).Execute(false, true, false);
-
-        #region ReceiverConfiguration
 
         BusConfiguration busConfiguration = new BusConfiguration();
-        busConfiguration.UseTransport<SqlServerTransport>()
-            .DefaultSchema("receiver")
-            .UseSpecificConnectionInformation(endpoint =>
-            {
-                if (endpoint == "error")
-                {
-                    return ConnectionInfo.Create().UseSchema("dbo");
-                }
-                if (endpoint == "audit")
-                {
-                    return ConnectionInfo.Create().UseSchema("dbo");
-                }
-                string schema = endpoint.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)[0].ToLowerInvariant();
-                return ConnectionInfo.Create().UseSchema(schema);
-            });
-        busConfiguration.UsePersistence<NHibernatePersistence>()
-            .UseConfiguration(hibernateConfig)
-            .RegisterManagedSessionInTheContainer();
-        #endregion
 
-        using (Bus.Create(busConfiguration).Start())
+        Customize(busConfiguration);
+
+        //.RegisterManagedSessionInTheContainer();
+
+        busConfiguration.PurgeOnStartup(true);
+        busConfiguration.EnableInstallers();
+
+        X = new CountdownEvent(256);
+
+        long orderId = 0;
+
+        using (var bus = Bus.Create(busConfiguration).Start())
         {
-            Console.WriteLine("Press any key to exit");
             Console.ReadKey();
+            Console.WriteLine("Press CTRL+C key to exit");
+            var start = Stopwatch.StartNew();
+            var interval = Stopwatch.StartNew();
+            while (true)
+            {
+                X.Reset();
+
+
+                Console.Write("*");
+                Parallel.For(0, X.InitialCount, i =>
+                {
+                    var id = Interlocked.Increment(ref orderId);
+                    bus.SendLocal(new SubmitOrder
+                    {
+                        OrderId = id.ToString(CultureInfo.InvariantCulture)
+                    });
+                });
+
+                X.Wait();
+
+                var elapsedTicks = Interval(interval);
+
+                var perMessage = elapsedTicks / X.InitialCount;
+
+                var currentThroughput = TimeSpan.TicksPerHour / perMessage;
+                var averageThroughput = TimeSpan.TicksPerHour / (start.ElapsedTicks / orderId);
+                Console.Title = string.Format("{0:N0}/h ~{1:N0}/h +{2:N0} @{3:N0}s", currentThroughput, averageThroughput, orderId, start.Elapsed.TotalSeconds);
+
+                Thread.Sleep(15000); // Should result in downscale of polling sql server threads
+            }
         }
+    }
+
+    static long Interval(Stopwatch sw)
+    {
+        var elapsed = sw.ElapsedTicks;
+        sw.Restart();
+        return elapsed;
+    }
+
+    static void Customize(BusConfiguration configuration)
+    {
+        var sqlServerTimeout = TimeSpan.FromSeconds(120);
+
+        configuration.UseTransport<SqlServerTransport>()
+            .DefaultSchema("workflow")
+            //.PauseAfterReceiveFailure(sqlServerTimeout)
+            .TimeToWaitBeforeTriggeringCircuitBreaker(sqlServerTimeout);
+        configuration.UsePersistence<InMemoryPersistence>();
+        configuration.UsePersistence<NHibernatePersistence, StorageType.Timeouts>()
+            .RegisterManagedSessionInTheContainer();
+
+        configuration.TimeToWaitBeforeTriggeringCriticalErrorOnTimeoutOutages(sqlServerTimeout);
+        //configuration.EndpointName(endpointName);
+        configuration.UseSerialization<JsonSerializer>();
+        configuration.EnableInstallers();
     }
 }
