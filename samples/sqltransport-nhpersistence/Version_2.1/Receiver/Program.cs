@@ -42,7 +42,6 @@ class Program
             {
                 X.Reset();
 
-
                 Console.Write("*");
                 Parallel.For(0, X.InitialCount, i =>
                 {
@@ -59,9 +58,9 @@ class Program
 
                 var perMessage = elapsedTicks / X.InitialCount;
 
-                var currentThroughput = TimeSpan.TicksPerHour / perMessage;
-                var averageThroughput = TimeSpan.TicksPerHour / (start.ElapsedTicks / orderId);
-                Console.Title = string.Format("{0:N0}/h ~{1:N0}/h +{2:N0} @{3:N0}s", currentThroughput, averageThroughput, orderId, start.Elapsed.TotalSeconds);
+                var currentThroughput = TimeSpan.TicksPerSecond / perMessage;
+                var averageThroughput = TimeSpan.TicksPerSecond / (start.ElapsedTicks / orderId);
+                Console.Title = string.Format("{0:N0}/s ~{1:N0}/s +{2:N0} @{3:N0}s", currentThroughput, averageThroughput, orderId, start.Elapsed.TotalSeconds);
 
                 Thread.Sleep(15000); // Should result in downscale of polling sql server threads
             }
