@@ -34,6 +34,12 @@ class Program
 
         using (var bus = Bus.Create(busConfiguration).Start())
         {
+            Console.WriteLine(
+                "IsServerGC:{0} LatencyMode:{1} Is64BitProcess:{2}",
+                System.Runtime.GCSettings.IsServerGC,
+                System.Runtime.GCSettings.LatencyMode,
+                System.Environment.Is64BitProcess);
+
             Console.ReadKey();
             Console.WriteLine("Press CTRL+C key to exit");
             var start = Stopwatch.StartNew();
