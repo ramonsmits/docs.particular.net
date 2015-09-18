@@ -7,7 +7,7 @@ public class MessageWithLargePayloadHandler : IHandleMessages<MessageWithLargePa
 {
     public void Handle(MessageWithLargePayload message)
     {
-        Console.WriteLine("Message received. Description: '{0}'. Size of payload property: {1} Bytes", message.Description, message.LargePayload.Value.Length);
+        Console.WriteLine("Message received. Description: '{0}'. Size of payload property: {1} Bytes", message.Description, message.LargePayload.Length);
     }
 }
 

@@ -19,6 +19,9 @@ class Program
 
         busConfiguration.UsePersistence<InMemoryPersistence>();
         busConfiguration.EnableInstallers();
+        busConfiguration.Conventions()
+            .DefiningDataBusPropertiesAs(p => p.PropertyType == typeof(byte[]));
+
         using (IBus bus = Bus.Create(busConfiguration).Start())
         {
             Run(bus);
@@ -50,7 +53,7 @@ class Program
         MessageWithLargePayload message = new MessageWithLargePayload
         {
             Description = "This message contains a large payload that will be sent on the Azure data bus",
-            LargePayload = new DataBusProperty<byte[]>(new byte[1024*1024*5]) // 5MB
+            LargePayload = new byte[1024*1024*5] // 5MB
         };
         bus.Send("Samples.AzureBlobStorageDataBus.Receiver", message);
 
