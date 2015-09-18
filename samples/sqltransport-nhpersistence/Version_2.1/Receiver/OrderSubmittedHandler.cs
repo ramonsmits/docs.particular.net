@@ -17,7 +17,7 @@ public class OrderSubmittedHandler : IHandleMessages<SubmitOrder>
     {
         //Console.WriteLine("Order {0} worth {1} submitted", message.OrderId, message.Value);
 
-        Program.X.Signal();
+        Runner.X.Signal();
 
         //session.SaveOrUpdate(new Order
         //{
