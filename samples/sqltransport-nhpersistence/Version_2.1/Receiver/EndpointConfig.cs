@@ -18,6 +18,8 @@ namespace Receiver
             var sqlServerTimeout = TimeSpan.FromMinutes(1);
 
             configuration
+                .PurgeOnStartup(true);
+            configuration
                 .UseTransport<SqlServerTransport>()
                 .DefaultSchema("workflow")
                 //.PauseAfterReceiveFailure(sqlServerTimeout)
