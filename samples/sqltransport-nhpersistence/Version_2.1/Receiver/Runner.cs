@@ -11,8 +11,7 @@ public class Runner : IWantToRunWhenBusStartsAndStops
 {
     ILog Log = LogManager.GetLogger(typeof(Runner));
     public static CountdownEvent X;
-
-    private IBus bus { get { return BusInstance.busInstance; } }
+    public IBus Bus { get; set; }
     private Task loopTask;
     private bool shutdown;
     private System.Threading.CancellationTokenSource stopLoop;
@@ -43,7 +42,7 @@ public class Runner : IWantToRunWhenBusStartsAndStops
             Parallel.For(0, X.InitialCount, i =>
             {
                 var id = Interlocked.Increment(ref orderId);
-                bus.SendLocal(new SubmitOrder
+                Bus.SendLocal(new SubmitOrder
                 {
                     OrderId = id.ToString(CultureInfo.InvariantCulture)
                 });
