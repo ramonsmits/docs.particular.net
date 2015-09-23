@@ -94,5 +94,6 @@
   <PropertyGroup>
     <StartAction>Program</StartAction>
     <StartProgram>$(ProjectDir)$(OutputPath)NServiceBus.Host.exe</StartProgram>
+    <StartArguments>NServiceBus.Lite Receiver.SqlTransport</StartArguments>
   </PropertyGroup>
 </Project>
