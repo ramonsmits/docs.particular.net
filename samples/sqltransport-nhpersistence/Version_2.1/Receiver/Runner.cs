@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
-using Receiver;
 using NServiceBus.Logging;
 
 public class Runner : IWantToRunWhenBusStartsAndStops
@@ -37,6 +36,10 @@ public class Runner : IWantToRunWhenBusStartsAndStops
         Console.WriteLine("Press CTRL+C key to exit");
         var start = Stopwatch.StartNew();
         var interval = Stopwatch.StartNew();
+
+        Log.Warn("Sleeping for the bus to purge the queue. Loop requires the queue to be empty.");
+        Thread.Sleep(5000);
+
         while (!shutdown)
         {
             X.Reset();
