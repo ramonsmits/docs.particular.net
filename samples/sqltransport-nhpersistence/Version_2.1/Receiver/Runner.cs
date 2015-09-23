@@ -31,6 +31,9 @@ public class Runner : IWantToRunWhenBusStartsAndStops
         long orderId = 0;
 
         Log.InfoFormat("IsServerGC:{0} ({1})", System.Runtime.GCSettings.IsServerGC, System.Runtime.GCSettings.LatencyMode);
+        Log.InfoFormat("ProcessorCount: {0}", Environment.ProcessorCount);
+        Log.InfoFormat("64bit: {0}", Environment.Is64BitProcess);
+
         Console.WriteLine("Press CTRL+C key to exit");
         var start = Stopwatch.StartNew();
         var interval = Stopwatch.StartNew();
