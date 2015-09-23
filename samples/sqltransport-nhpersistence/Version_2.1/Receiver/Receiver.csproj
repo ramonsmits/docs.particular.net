@@ -80,6 +80,9 @@
     <Compile Include="SubmitOrder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NServiceBus.Host.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
