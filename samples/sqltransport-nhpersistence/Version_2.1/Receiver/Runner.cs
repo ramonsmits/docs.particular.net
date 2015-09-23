@@ -9,7 +9,7 @@ using NServiceBus.Logging;
 
 public class Runner : IWantToRunWhenBusStartsAndStops
 {
-    ILog Log = LogManager.GetLogger<Runner>();
+    ILog Log = LogManager.GetLogger(typeof(Runner));
     public static CountdownEvent X;
 
     private IBus bus { get { return BusInstance.busInstance; } }

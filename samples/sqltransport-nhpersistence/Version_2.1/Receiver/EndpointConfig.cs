@@ -1,6 +1,7 @@
 
 using System;
 using System.Net.Mime;
+using NHibernate.Cfg;
 using NServiceBus.Persistence;
 
 namespace Receiver
@@ -13,31 +14,23 @@ namespace Receiver
 	*/
     public class EndpointConfig : IConfigureThisEndpoint
     {
-        public void Customize(BusConfiguration configuration)
+        public void Customize()
         {
-            var sqlServerTimeout = TimeSpan.FromMinutes(1);
+            var configuration = Configure.With();
 
             configuration
                 .PurgeOnStartup(true);
             configuration
-                .UseTransport<SqlServerTransport>()
-                .DefaultSchema("workflow")
-                //.PauseAfterReceiveFailure(sqlServerTimeout)
-                .TimeToWaitBeforeTriggeringCircuitBreaker(sqlServerTimeout);
-
-            configuration.UsePersistence<InMemoryPersistence>();
-            configuration.UsePersistence<NHibernatePersistence, StorageType.Timeouts>()
-                .RegisterManagedSessionInTheContainer();
-
-            configuration.TimeToWaitBeforeTriggeringCriticalErrorOnTimeoutOutages(sqlServerTimeout);
+                .UseTransport<SqlServer>();
+            configuration.InMemorySubscriptionStorage();
+            configuration.InMemoryFaultManagement();
+            configuration.UseNHibernateTimeoutPersister();
 
             var endpointName = "memleaktest";
-            configuration.EndpointName(endpointName);
+            configuration.DefineEndpointName(endpointName);
             BusInstance.EndpointName = endpointName;
 
-            configuration.UseSerialization<JsonSerializer>();
-
-            configuration.EnableInstallers();
+            Configure.Serialization.Json();
         }
     }
 
