@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Humanizer;
 using NServiceBus;
 using NServiceBus.Logging;
 
@@ -69,7 +70,7 @@ public class Runner : IWantToRunWhenBusStartsAndStops
 
             var currentThroughput = TimeSpan.TicksPerHour / perMessage;
             var averageThroughput = TimeSpan.TicksPerHour / (start.ElapsedTicks / orderId);
-            Console.Title = string.Format("{0:N0}/h ~{1:N0}/h +{2:N0} @{3:N0}s p{4:N0}", currentThroughput, averageThroughput, orderId, start.Elapsed.TotalSeconds, processedCount);
+            Console.Title = string.Format("{0:N0}/h ~{1:N0}/h +{2:N0} @{3:N0} p{4:N0}", currentThroughput, averageThroughput, orderId, start.Elapsed.Humanize(2), processedCount);
 
             //Thread.Sleep(15000); // Should result in downscale of polling sql server threads
         }
