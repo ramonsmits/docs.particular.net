@@ -64,7 +64,7 @@ public class Runner : IWantToRunWhenBusStartsAndStops
 
             var currentThroughput = TimeSpan.TicksPerHour / perMessage;
             var averageThroughput = TimeSpan.TicksPerHour / (start.ElapsedTicks / orderId);
-            Console.Title = string.Format("{0:N0}/h ~{1:N0}/h +{2:N0} @{3:N0}s", currentThroughput, averageThroughput, orderId, start.Elapsed.TotalSeconds);
+            Console.Title = string.Format("{0:N0}/h ~{1:N0}/h +{2:N0} @{3:N0}s p{4:N0}", currentThroughput, averageThroughput, orderId, start.Elapsed.TotalSeconds, processedCount);
 
             //Thread.Sleep(15000); // Should result in downscale of polling sql server threads
         }
@@ -91,5 +91,13 @@ public class Runner : IWantToRunWhenBusStartsAndStops
         var elapsed = sw.ElapsedTicks;
         sw.Restart();
         return elapsed;
+    }
+
+    private static long processedCount;
+
+    internal static void Signal()
+    {
+        Interlocked.Increment(ref processedCount);
+        X.Signal();
     }
 }
