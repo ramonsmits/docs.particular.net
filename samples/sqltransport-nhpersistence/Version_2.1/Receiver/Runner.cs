@@ -4,26 +4,38 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
-using NServiceBus.Config;
 using Receiver;
+using NServiceBus.Logging;
 
 public class Runner : IWantToRunWhenBusStartsAndStops
 {
+    ILog Log = LogManager.GetLogger<Runner>();
     public static CountdownEvent X;
 
     private IBus bus { get { return BusInstance.busInstance; } }
+    private Task loopTask;
+    private bool shutdown;
+    private System.Threading.CancellationTokenSource stopLoop;
 
     public void Start()
+    {
+        Log.Info("Starting...");
+        stopLoop = new CancellationTokenSource();
+        loopTask = Task.Factory.StartNew(Loop, TaskCreationOptions.LongRunning);
+        Log.Info("Started");
+    }
+
+    void Loop(object o)
     {
         X = new CountdownEvent(256);
 
         long orderId = 0;
 
-        Console.WriteLine("IsServerGC:{0} ({1})", System.Runtime.GCSettings.IsServerGC, System.Runtime.GCSettings.LatencyMode);
+        Log.InfoFormat("IsServerGC:{0} ({1})", System.Runtime.GCSettings.IsServerGC, System.Runtime.GCSettings.LatencyMode);
         Console.WriteLine("Press CTRL+C key to exit");
         var start = Stopwatch.StartNew();
         var interval = Stopwatch.StartNew();
-        while (true)
+        while (!shutdown)
         {
             X.Reset();
 
@@ -37,7 +49,14 @@ public class Runner : IWantToRunWhenBusStartsAndStops
                 });
             });
 
-            X.Wait();
+            try
+            {
+                X.Wait(stopLoop.Token);
+            }
+            catch (OperationCanceledException)
+            {
+                break;
+            }
 
             var elapsedTicks = Interval(interval);
 
@@ -53,7 +72,18 @@ public class Runner : IWantToRunWhenBusStartsAndStops
 
     public void Stop()
     {
-        throw new NotImplementedException();
+        Log.Info("Stopping...");
+        shutdown = true;
+        using (stopLoop)
+        {
+            stopLoop.Cancel();
+            using (loopTask)
+            {
+                loopTask.Wait();
+            }
+        }
+
+        Log.Info("Stopped");
     }
 
     static long Interval(Stopwatch sw)
@@ -62,22 +92,4 @@ public class Runner : IWantToRunWhenBusStartsAndStops
         sw.Restart();
         return elapsed;
     }
-
-    //static void Customize(BusConfiguration configuration)
-    //{
-    //    var sqlServerTimeout = TimeSpan.FromSeconds(120);
-
-    //    configuration.UseTransport<SqlServerTransport>()
-    //        .DefaultSchema("workflow")
-    //        //.PauseAfterReceiveFailure(sqlServerTimeout)
-    //        .TimeToWaitBeforeTriggeringCircuitBreaker(sqlServerTimeout);
-    //    configuration.UsePersistence<InMemoryPersistence>();
-    //    configuration.UsePersistence<NHibernatePersistence, StorageType.Timeouts>()
-    //        .RegisterManagedSessionInTheContainer();
-
-    //    configuration.TimeToWaitBeforeTriggeringCriticalErrorOnTimeoutOutages(sqlServerTimeout);
-    //    //configuration.EndpointName(endpointName);
-    //    configuration.UseSerialization<JsonSerializer>();
-    //    configuration.EnableInstallers();
-    //}
 }
