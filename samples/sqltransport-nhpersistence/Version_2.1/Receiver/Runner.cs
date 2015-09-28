@@ -16,6 +16,14 @@ public class Runner : IWantToRunWhenBusStartsAndStops
     private bool shutdown;
     private System.Threading.CancellationTokenSource stopLoop;
 
+    // Message per second
+    //const string TimeUnit = "s";
+    //private readonly long TicksPerTimeUnit = Stopwatch.Frequency;
+
+    // Message per hour
+    const string TimeUnit = "h";
+    private readonly long TicksPerTimeUnit = Stopwatch.Frequency * 3600;
+
     public void Start()
     {
         Log.Info("Starting...");
@@ -64,13 +72,22 @@ public class Runner : IWantToRunWhenBusStartsAndStops
                 break;
             }
 
-            var elapsedTicks = Interval(interval);
+            var elapsed = interval.Elapsed.Ticks;
+            interval.Restart();
 
-            var perMessage = elapsedTicks / X.InitialCount;
+            var currentPerMessageTicks = elapsed / X.InitialCount;
+            var currentThroughput = TicksPerTimeUnit / currentPerMessageTicks;
+            var averagePerMessageTicks = start.ElapsedTicks / orderId;
+            var averageThroughput = TicksPerTimeUnit / averagePerMessageTicks;
 
-            var currentThroughput = TimeSpan.TicksPerHour / perMessage;
-            var averageThroughput = TimeSpan.TicksPerHour / (start.ElapsedTicks / orderId);
-            Console.Title = string.Format("{0:N0}/h ~{1:N0}/h +{2:N0} @{3:N0} p{4:N0}", currentThroughput, averageThroughput, orderId, start.Elapsed.Humanize(2), processedCount);
+            Console.Title = string.Format("{0:N0}/{5} ~{1:N0}/{5}  +{2:N0} @{3} p{4:N0}",
+                currentThroughput,
+                averageThroughput,
+                orderId,
+                start.Elapsed.Humanize(2),
+                processedCount,
+                TimeUnit
+                );
 
             //Thread.Sleep(15000); // Should result in downscale of polling sql server threads
         }
@@ -92,12 +109,6 @@ public class Runner : IWantToRunWhenBusStartsAndStops
         Log.Info("Stopped");
     }
 
-    static long Interval(Stopwatch sw)
-    {
-        var elapsed = sw.ElapsedTicks;
-        sw.Restart();
-        return elapsed;
-    }
 
     private static long processedCount;
 
