@@ -6,9 +6,11 @@ class Program
 
     static void Main()
     {
+        Console.Title = "Server";
+
         #region server
         BusConfiguration busConfiguration = new BusConfiguration();
-        busConfiguration.EndpointName("Samples.Scaleout.Server");
+        busConfiguration.EndpointName("Samples.Scaleout.v5.Server");
         busConfiguration.RunMSMQDistributor(withWorker: false);
         #endregion
         busConfiguration.UseSerialization<JsonSerializer>();

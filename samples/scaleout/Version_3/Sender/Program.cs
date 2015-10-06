@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Messaging;
 using NServiceBus;
 using NServiceBus.Installation.Environments;
 
@@ -8,7 +9,7 @@ class Program
     {
         Configure configure = Configure.With();
         configure.Log4Net();
-        configure.DefineEndpointName("Samples.Scaleout.Sender");
+        configure.DefineEndpointName("Samples.Scaleout.v3.Sender");
         configure.DefaultBuilder();
         configure.MsmqTransport();
         configure.InMemorySagaPersister();
@@ -43,7 +44,7 @@ class Program
         {
             OrderId = Guid.NewGuid()
         };
-        bus.Send("Samples.Scaleout.Server", placeOrder);
+        bus.Send("Samples.Scaleout.v3.Server", placeOrder);
         Console.WriteLine("Sent PlacedOrder command with order id [{0}].", placeOrder.OrderId);
 
         #endregion

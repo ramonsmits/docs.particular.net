@@ -6,8 +6,9 @@ class Program
 
     static void Main()
     {
+        Console.Title = "Sender";
         BusConfiguration busConfiguration = new BusConfiguration();
-        busConfiguration.EndpointName("Samples.Scaleout.Sender");
+        busConfiguration.EndpointName("Samples.Scaleout.v5.Sender");
         busConfiguration.EnableInstallers();
         busConfiguration.UseSerialization<JsonSerializer>();
         busConfiguration.UsePersistence<InMemoryPersistence>();
@@ -39,7 +40,7 @@ class Program
         {
             OrderId = Guid.NewGuid()
         };
-        bus.Send("Samples.Scaleout.Server", placeOrder);
+        bus.Send("Samples.Scaleout.v5.Server", placeOrder);
         Console.WriteLine("Sent PlacedOrder command with order id [{0}].", placeOrder.OrderId);
 
         #endregion

@@ -6,13 +6,14 @@ class Program
 {
     static void Main()
     {
+        Console.Title = "Worker #2";
         Configure.Serialization.Json();
         Configure configure = Configure.With();
         configure.Log4Net();
-        configure.DefineEndpointName("Samples.Scaleout.Worker2");
+        configure.DefineEndpointName("Samples.Scaleout.v4.Worker2");
         configure.DefaultBuilder();
         configure.EnlistWithMSMQDistributor();
-        Address.InitializeLocalAddress("Samples.Scaleout.Worker2");
+        Address.InitializeLocalAddress("Samples.Scaleout.v4.Worker2");
         configure.InMemorySagaPersister();
         configure.UseInMemoryTimeoutPersister();
         configure.InMemorySubscriptionStorage();

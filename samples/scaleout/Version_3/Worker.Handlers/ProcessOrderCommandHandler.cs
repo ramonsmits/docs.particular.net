@@ -18,13 +18,14 @@ public class ProcessOrderCommandHandler : IHandleMessages<PlaceOrder>
         // Process Order...
         Console.Out.WriteLine("Processing received order....");
 
-        OrderPlaced message = new OrderPlaced
-        {
-            OrderId = placeOrder.OrderId,
-            WorkerName = Assembly.GetEntryAssembly().GetName().Name
-        };
-        bus.Reply(message);
-        Console.Out.WriteLine("Sent Order placed event for orderId [{0}].", placeOrder.OrderId);
+        throw new ApplicationException("Boem!");
+        //OrderPlaced message = new OrderPlaced
+        //{
+        //    OrderId = placeOrder.OrderId,
+        //    WorkerName = Assembly.GetEntryAssembly().GetName().Name
+        //};
+        //bus.Reply(message);
+        //Console.Out.WriteLine("Sent Order placed event for orderId [{0}].", placeOrder.OrderId);
     }
 }
 

@@ -23,8 +23,9 @@ public class ProcessOrderCommandHandler : IHandleMessages<PlaceOrder>
             OrderId = placeOrder.OrderId,
             WorkerName = Assembly.GetEntryAssembly().GetName().Name
         };
-        bus.Reply(message);
-        Console.Out.WriteLine("Sent Order placed event for orderId [{0}].", placeOrder.OrderId);
+        throw new ApplicationException("BOem!");
+        //bus.Reply(message);
+        //Console.Out.WriteLine("Sent Order placed event for orderId [{0}].", placeOrder.OrderId);
     }
 }
 

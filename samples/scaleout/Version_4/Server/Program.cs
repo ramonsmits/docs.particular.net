@@ -6,12 +6,13 @@ class Program
 {
     static void Main()
     {
+        Console.Title = "Server";
         Configure.Serialization.Json();
 
         #region server
         Configure configure = Configure.With();
         configure.Log4Net();
-        configure.DefineEndpointName("Samples.Scaleout.Server");
+        configure.DefineEndpointName("Samples.Scaleout.v4.Server");
         configure.DefaultBuilder();
         configure.RunMSMQDistributor(withWorker:false);
         #endregion
