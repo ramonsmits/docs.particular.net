@@ -24,6 +24,7 @@ class Program
         configure.RunTimeoutManagerWithInMemoryPersistence();
         configure.InMemorySubscriptionStorage();
         configure.JsonSerializer();
+        configure.DisableTimeoutManager();
         using (IStartableBus startableBus = configure.UnicastBus().CreateBus())
         {
             startableBus.Start(() => configure.ForInstallationOn<Windows>().Install());
