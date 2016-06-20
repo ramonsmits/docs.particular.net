@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="OrderHandler.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProvideSecondLevelRetriesConfig.cs" />
+    <Compile Include="ProvideTransportConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

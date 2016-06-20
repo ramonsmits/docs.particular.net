@@ -21,9 +21,9 @@ class Program
 
         using (Bus.Create(busConfiguration).Start())
         {
-            Console.WriteLine("Press any key to exit");
+            Console.WriteLine("Press ENTER key to exit");
             Console.WriteLine("Waiting for Order messages from the Sender");
-            Console.ReadKey();
+            Console.ReadLine();
         }
     }
 

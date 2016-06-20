@@ -22,12 +22,12 @@ public class Program
 
         using (var bus = Bus.Create(busConfiguration).Start())
         {
-            Console.WriteLine("Press <enter> to send a message");
-            Console.WriteLine("Press any other key to exit");
+            Console.WriteLine("Press any key to send a message");
+            Console.WriteLine("Press ESC  key to exit");
 
             while (true)
             {
-                if (Console.ReadKey().Key != ConsoleKey.Enter)
+                if (Console.ReadKey().Key == ConsoleKey.Escape)
                 {
                     return;
                 }
