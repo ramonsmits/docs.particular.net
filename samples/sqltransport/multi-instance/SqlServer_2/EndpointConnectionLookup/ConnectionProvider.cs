@@ -12,14 +12,14 @@ public class ConnectionProvider
     {
         string cs;
 
-        if (transportAddress == "error" || transportAddress == "audit")
+        if (transportAddress == "error" || transportAddress == "audit" || transportAddress.StartsWith("Particular.ServiceControl.SQL-Multi"))
             cs = ServiceControlConnectionString;
         else
             cs = transportAddress.StartsWith("Samples.SqlServer.MultiInstanceSender")
                 ? SenderConnectionString
                 : ReceiverConnectionString;
 
-        Console.WriteLine(" {0} = {1}", transportAddress, cs);
+        Console.WriteLine("GetConnection: {0} = {1}", transportAddress, cs);
         return ConnectionInfo.Create().UseConnectionString(cs);
     }
 }
