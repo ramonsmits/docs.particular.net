@@ -52,6 +52,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProvideAuditConfig.cs" />
     <Compile Include="EvenMinuteCheck.cs" />
     <Compile Include="OrderHandler.cs" />
     <Compile Include="Program.cs" />

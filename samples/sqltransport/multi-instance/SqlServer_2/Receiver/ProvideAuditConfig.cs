@@ -1,0 +1,16 @@
+﻿namespace Receiver
+{
+    using NServiceBus.Config;
+    using NServiceBus.Config.ConfigurationSource;
+
+    public class ProvideAuditConfig : IProvideConfiguration<AuditConfig>
+    {
+        public AuditConfig GetConfiguration()
+        {
+            return new AuditConfig
+            {
+                QueueName = "audit"
+            };
+        }
+    }
+}

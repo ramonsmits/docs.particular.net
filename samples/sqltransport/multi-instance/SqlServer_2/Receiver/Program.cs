@@ -16,6 +16,8 @@ class Program
         transport.ConnectionString(ConnectionProvider.ReceiverConnectionString);
         busConfiguration.UseSerialization<JsonSerializer>();
         busConfiguration.UsePersistence<InMemoryPersistence>();
+        busConfiguration.EnableInstallers();
+        busConfiguration.PurgeOnStartup(true);
 
         #endregion
 

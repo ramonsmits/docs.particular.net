@@ -2,22 +2,28 @@
 using Messages;
 using NServiceBus.Saga;
 
-public class TestSaga : Saga<TestSaga.MyData>, IAmStartedByMessages<ClientOrder>
+public class TestSaga : Saga<TestSaga.MyData>, IAmStartedByMessages<ClientOrder>, IHandleTimeouts<ClientOrderTimeout>
 {
-    public class MyData : ContainSagaData
+    public void Handle(ClientOrder message)
     {
-        public Guid OrderId { get; set; }
+        Console.WriteLine("!!!!!!");
+        Data.OrderId = message.OrderId;
+        RequestTimeout<ClientOrderTimeout>(TimeSpan.FromSeconds(10));
+    }
+
+    public void Timeout(ClientOrderTimeout state)
+    {
+        Console.WriteLine("REQUESTED TIMEOUT HAS ARRIVED");
+        MarkAsComplete();
     }
 
     protected override void ConfigureHowToFindSaga(SagaPropertyMapper<MyData> mapper)
     {
         mapper.ConfigureMapping<ClientOrder>(x => x.OrderId).ToSaga(x => x.OrderId);
-
     }
 
-    public void Handle(ClientOrder message)
+    public class MyData : ContainSagaData
     {
-        Console.WriteLine("!!!!!!");
-        Data.OrderId = message.OrderId;
+        public Guid OrderId { get; set; }
     }
 }

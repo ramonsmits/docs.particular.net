@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="ClientOrder.cs" />
     <Compile Include="ClientOrderAccepted.cs" />
+    <Compile Include="ClientOrderTimeout.cs" />
     <Compile Include="ConfigErrorQueue.cs" />
   </ItemGroup>
   <ItemGroup>

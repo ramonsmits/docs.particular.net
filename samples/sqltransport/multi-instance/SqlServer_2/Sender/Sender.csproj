@@ -56,6 +56,7 @@
     <Compile Include="OrderAcceptedHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ConfigErrorQueue.cs" />
+    <Compile Include="ProvideAuditConfig.cs" />
     <Compile Include="ProvideSecondLevelRetriesConfig.cs" />
     <Compile Include="ProvideTransportConfig.cs" />
   </ItemGroup>
