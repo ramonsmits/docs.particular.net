@@ -15,8 +15,7 @@ public class OrderSagaDataFluentMap : ClassMap<OrderSagaDataFluent>
             .Not.Nullable()
             .Unique();
         Version(x => x.Version);
-        References(x => x.From, "FromLocation")
-            .Cascade.All();
+        Map(x=>x.From, "FromLocationJson").CustomType<Blobbed<OrderSagaDataFluent.Location>>();
         References(x => x.To, "ToLocation")
             .Cascade.All();
         Component(x => x.Total, c =>

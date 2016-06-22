@@ -9,6 +9,7 @@ public class OrderSagaDataXml : ContainSagaData
     public virtual Location To { get; set; }
     public virtual AmountInfo Total { get; set; }
 
+    [Serializable]
     public class Location
     {
         public virtual Guid Id { get; set; }

@@ -10,7 +10,7 @@
     <property name="Originator" />
     <property name="OriginalMessageId" />
     <property name="OrderId" type="AnsiString"  length="100" unique="true" not-null="true" />
-    <many-to-one name="From" cascade="all-delete-orphan" column="FromLocation"/>
+    <property name="From" type="Blobbed`1[[OrderSagaDataXml+Location, Sample.XmlMapping]], Sample.XmlMapping" column="FromLocationJson"/>
     <many-to-one name="To" cascade="all-delete-orphan" column="ToLocation"/>
     <component name="Total">
       <property name="Currency" type="AnsiString" column="Total_Currency" length="3" />

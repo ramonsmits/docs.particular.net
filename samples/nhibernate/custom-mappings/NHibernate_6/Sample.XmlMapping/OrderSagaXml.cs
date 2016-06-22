@@ -46,7 +46,7 @@ public class OrderSagaXml : Saga<OrderSagaDataXml>,
     public void Handle(CompleteOrder message)
     {
         logger.InfoFormat("Saga with OrderId {0} received CompleteOrder with OrderId {1}", Data.OrderId, message.OrderId);
-        MarkAsComplete();
+        //MarkAsComplete();
     }
 
 }
