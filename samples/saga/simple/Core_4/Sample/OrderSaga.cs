@@ -10,6 +10,7 @@ public class OrderSaga : Saga<OrderSagaData>,
     IHandleTimeouts<CancelOrder>
 {
     static ILog log = LogManager.GetLogger(typeof(OrderSaga));
+    public ITest Test { get; set; }
 
     public override void ConfigureHowToFindSaga()
     {
@@ -21,6 +22,8 @@ public class OrderSaga : Saga<OrderSagaData>,
 
     public void Handle(StartOrder message)
     {
+        Test.Call();
+
         Data.OrderId = message.OrderId;
         log.Info($"Saga with OrderId {Data.OrderId} received StartOrder with OrderId {message.OrderId}");
         var completeOrder = new CompleteOrder
@@ -43,5 +46,19 @@ public class OrderSaga : Saga<OrderSagaData>,
         MarkAsComplete();
     }
 
+}
+
+public interface ITest
+{
+    void Call();
+}
+
+public class Test : ITest
+{
+    public void Call()
+    {
+        Console.WriteLine("Call");
+        
+    }
 }
 #endregion

@@ -11,13 +11,17 @@ class Program
         Configure.Serialization.Json();
         Configure.Features.Enable<Sagas>();
         var configure = Configure.With();
+        configure.UnityBuilder();
         configure.Log4Net();
         configure.DefineEndpointName("Samples.ComplexSagaFindingLogic");
         configure.DefaultBuilder();
         configure.InMemorySagaPersister();
         configure.UseInMemoryTimeoutPersister();
         configure.InMemorySubscriptionStorage();
+
         configure.UseTransport<Msmq>();
+        configure.Configurer.ConfigureComponent<Test>(DependencyLifecycle.InstancePerCall);
+
         using (var startableBus = configure.UnicastBus().CreateBus())
         {
             var bus = startableBus.Start(() => configure.ForInstallationOn<Windows>().Install());
