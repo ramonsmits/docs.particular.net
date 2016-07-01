@@ -11,10 +11,9 @@ class Program
         Configure.Serialization.Json();
         Configure.Features.Enable<Sagas>();
         var configure = Configure.With();
-        configure.UnityBuilder();
         configure.Log4Net();
         configure.DefineEndpointName("Samples.ComplexSagaFindingLogic");
-        configure.DefaultBuilder();
+        configure.UnityBuilder();
         configure.InMemorySagaPersister();
         configure.UseInMemoryTimeoutPersister();
         configure.InMemorySubscriptionStorage();
