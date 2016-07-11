@@ -1,9 +1,9 @@
-using NServiceBus;
 using System;
+
 #region ResponseMessage
-public class DataResponseMessage : IMessage
+public interface DataResponseMessage
 {
-    public Guid DataId { get; set; }
-    public string String { get; set; }
+    Guid DataId { get; set; }
+    string String { get; set; }
 }
 #endregion

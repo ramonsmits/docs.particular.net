@@ -16,13 +16,11 @@ public class RequestDataMessageHandler : IHandleMessages<RequestDataMessage>
 
         #region DataResponseReply
 
-        var response = new DataResponseMessage
+        await context.Reply<DataResponseMessage>(response =>
         {
-            DataId = message.DataId,
-            String = message.String
-        };
-
-        await context.Reply(response)
+            response.DataId = message.DataId;
+            response.String = message.String;
+        })
             .ConfigureAwait(false);
 
         #endregion

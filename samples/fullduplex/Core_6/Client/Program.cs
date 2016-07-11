@@ -21,6 +21,9 @@ class Program
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.SendFailedMessagesTo("error");
+        endpointConfiguration.SetConventions();
+
+        endpointConfiguration.Routing().RouteToEndpoint(typeof(RequestDataMessage), "Samples.FullDuplex.Server");
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
@@ -43,12 +46,11 @@ class Program
                 var guid = Guid.NewGuid();
                 Console.WriteLine($"Requesting to get data by id: {guid.ToString("N")}");
 
-                var message = new RequestDataMessage
+                await endpointInstance.Send<RequestDataMessage>(message =>
                 {
-                    DataId = guid,
-                    String = "String property value"
-                };
-                await endpointInstance.Send("Samples.FullDuplex.Server", message)
+                    message.DataId = guid;
+                    message.String = "String property value";
+                })
                     .ConfigureAwait(false);
             }
 

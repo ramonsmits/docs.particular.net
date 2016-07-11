@@ -1,10 +1,9 @@
 using System;
-using NServiceBus;
 
 #region RequestMessage
-public class RequestDataMessage : IMessage
+public interface RequestDataMessage
 {
-    public Guid DataId { get; set; }
-    public string String { get; set; }
+    Guid DataId { get; set; }
+    string String { get; set; }
 }
 #endregion
