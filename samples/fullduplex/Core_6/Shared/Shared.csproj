@@ -36,6 +36,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventions.cs" />
     <Compile Include="DataResponseMessage.cs" />
     <Compile Include="RequestDataMessage.cs" />
   </ItemGroup>
