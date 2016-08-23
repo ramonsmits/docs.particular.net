@@ -17,6 +17,7 @@ class Program
 
     static async Task AsyncMain()
     {
+        InitLogging.Init();
         Console.Title = "Samples.SQLNHibernateOutbox.Receiver";
         #region NHibernate
 
@@ -27,7 +28,7 @@ class Program
             x.Dialect<MsSql2012Dialect>();
         });
         var mapper = new ModelMapper();
-        mapper.AddMapping<OrderMap>();
+        //mapper.AddMapping<OrderMap>();
         hibernateConfig.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 
         #endregion
@@ -48,16 +49,16 @@ class Program
 
         #endregion
 
-        #region RetriesConfiguration
+        //#region RetriesConfiguration
 
-        endpointConfiguration.Recoverability()
-            .Immediate(immediate => immediate.NumberOfRetries(0))
-            .Delayed(delayed => delayed.NumberOfRetries(0));
+        //endpointConfiguration.Recoverability()
+        //    .Immediate(immediate => immediate.NumberOfRetries(0))
+        //    .Delayed(delayed => delayed.NumberOfRetries(0));
 
-        #endregion
+        //#endregion
 
         endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.AuditProcessedMessagesTo("audit");
+        //endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.EnableInstallers();
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)

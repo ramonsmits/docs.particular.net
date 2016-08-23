@@ -13,6 +13,7 @@ class Program
 
     static async Task AsyncMain()
     {
+        InitLogging.Init();
         Console.Title = "Samples.SQLNHibernateOutbox.Sender";
         const string letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
         var random = new Random();
@@ -31,11 +32,11 @@ class Program
 
         #endregion
 
-        endpointConfiguration.Recoverability()
-            .Immediate(immediate => immediate.NumberOfRetries(0))
-            .Delayed(delayed => delayed.NumberOfRetries(0));
+        //endpointConfiguration.Recoverability()
+        //    .Immediate(immediate => immediate.NumberOfRetries(0))
+        //    .Delayed(delayed => delayed.NumberOfRetries(0));
         endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.AuditProcessedMessagesTo("audit");
+        //endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.EnableInstallers();
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
