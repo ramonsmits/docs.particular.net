@@ -6,6 +6,7 @@ class Program
 {
     static void Main()
     {
+        InitLogging.Init();
         Console.Title = "Samples.SQLNHibernateOutbox.Sender";
         const string letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
         var random = new Random();
@@ -18,6 +19,7 @@ class Program
         busConfiguration.UseTransport<SqlServerTransport>();
         busConfiguration.UsePersistence<NHibernatePersistence>();
         busConfiguration.EnableOutbox();
+        //busConfiguration.Transactions().DisableDistributedTransactions();
 
         #endregion
 

@@ -29,11 +29,19 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\..\..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\..\..\..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\..\..\..\packages\NServiceBus.5.2.15\lib\net45\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Log4Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\NServiceBus.Log4Net.1.0.0\lib\net45\NServiceBus.Log4Net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NServiceBus.NHibernate">
       <HintPath>..\..\..\..\..\packages\NServiceBus.NHibernate.6.2.7\lib\net45\NServiceBus.NHibernate.dll</HintPath>
@@ -45,12 +53,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderLifecycleSaga.cs" />
-    <Compile Include="OrderLifecycleSagaData.cs" />
-    <Compile Include="OrderMap.cs" />
-    <Compile Include="OrderSubmittedHandler.cs" />
-    <Compile Include="OrderTimeout.cs" />
+    <Compile Include="OrderHandler.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

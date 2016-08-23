@@ -12,6 +12,8 @@ class Program
 {
     static void Main()
     {
+        InitLogging.Init();
+
         Console.Title = "Samples.SQLNHibernateOutbox.Receiver";
         #region NHibernate
 
@@ -22,7 +24,7 @@ class Program
             x.Dialect<MsSql2012Dialect>();
         });
         var mapper = new ModelMapper();
-        mapper.AddMapping<OrderMap>();
+        //mapper.AddMapping<OrderMap>();
         hibernateConfig.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 
         #endregion
@@ -35,16 +37,19 @@ class Program
         #region ReceiverConfiguration
 
         busConfiguration.UseTransport<SqlServerTransport>();
-
         var persistence = busConfiguration.UsePersistence<NHibernatePersistence>();
         persistence.RegisterManagedSessionInTheContainer();
         persistence.UseConfiguration(hibernateConfig);
+
+        //busConfiguration.Transactions().Enable();
+        //busConfiguration.Transactions().DisableDistributedTransactions();
+        busConfiguration.Transactions().DefaultTimeout(TimeSpan.FromMinutes(10));
 
         busConfiguration.EnableOutbox();
 
         #endregion
 
-        busConfiguration.DisableFeature<SecondLevelRetries>();
+        //busConfiguration.DisableFeature<SecondLevelRetries>();
 
         using (Bus.Create(busConfiguration).Start())
         {
