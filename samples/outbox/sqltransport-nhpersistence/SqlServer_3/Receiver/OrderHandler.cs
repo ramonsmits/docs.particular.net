@@ -9,7 +9,7 @@ public class OrderHandler : IHandleMessages<OrderSubmitted>
 
     public async Task Handle(OrderSubmitted message, IMessageHandlerContext context)
     {
-        await Task.Delay(3000);
+        await Task.Delay(3000).ConfigureAwait(false);
         const string Retries = "NServiceBus.Retries";
 
 
