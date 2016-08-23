@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using NServiceBus;
 using NServiceBus.Logging;
 
@@ -8,6 +9,7 @@ public class OrderHandler : IHandleMessages<OrderSubmitted>
     public IBus Bus { get; set; }
     public void Handle(OrderSubmitted message)
     {
+        Thread.Sleep(3000);
         const string Retries = "NServiceBus.Retries";
 
         // if no SLR, then always fail, if SLR then succeed
