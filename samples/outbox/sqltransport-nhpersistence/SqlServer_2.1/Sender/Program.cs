@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Threading;
 using NServiceBus;
 
 class Program
@@ -25,16 +27,15 @@ class Program
 
         using (var bus = Bus.Create(busConfiguration).Start())
         {
+            var r = new Random();
+
             Console.WriteLine("Press enter to publish a message");
             Console.WriteLine("Press any key to exit");
-            while (true)
+            while (!Console.KeyAvailable)
             {
-                var key = Console.ReadKey();
-                Console.WriteLine();
-                if (key.Key != ConsoleKey.Enter)
-                {
-                    return;
-                }
+                Thread.Sleep(r.Next(5000));
+                Console.WriteLine("Publish...");
+
                 var orderId = new string(Enumerable.Range(0, 4).Select(x => letters[random.Next(letters.Length)]).ToArray());
                 bus.Publish(new OrderSubmitted
                 {

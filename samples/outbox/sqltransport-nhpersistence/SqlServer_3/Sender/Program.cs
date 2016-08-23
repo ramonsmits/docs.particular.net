@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
 using NServiceBus.Persistence;
@@ -43,16 +44,15 @@ class Program
             .ConfigureAwait(false);
         try
         {
+            var r = new Random();
+
             Console.WriteLine("Press enter to publish a message");
             Console.WriteLine("Press any key to exit");
-            while (true)
+            while (!Console.KeyAvailable)
             {
-                var key = Console.ReadKey();
-                Console.WriteLine();
-                if (key.Key != ConsoleKey.Enter)
-                {
-                    return;
-                }
+                Thread.Sleep(r.Next(5000));
+                Console.WriteLine("Publish...");
+
                 var orderId = new string(Enumerable.Range(0, 4).Select(x => letters[random.Next(letters.Length)]).ToArray());
                 var orderSubmitted = new OrderSubmitted
                 {
