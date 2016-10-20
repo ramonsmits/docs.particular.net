@@ -37,11 +37,13 @@ public class OrderSagaFluent :
         Data.To.Lat = 51.51558;
         Data.To.Long = -0.12085;
 
+        Data.Description = new string('*', 10000);
+
         var completeOrder = new CompleteOrder
         {
             OrderId = "123"
         };
-        Bus.SendLocal(completeOrder);
+        //Bus.SendLocal(completeOrder);
     }
 
     public void Handle(CompleteOrder message)

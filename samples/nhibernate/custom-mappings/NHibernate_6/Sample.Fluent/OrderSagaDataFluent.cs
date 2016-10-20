@@ -12,6 +12,7 @@ public class OrderSagaDataFluent :
     public virtual Location From { get; set; }
     public virtual Location To { get; set; }
     public virtual AmountInfo Total { get; set; }
+    public virtual string Description { get; set; }
 
     public class Location
     {

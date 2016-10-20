@@ -15,6 +15,8 @@ public class OrderSagaDataFluentMap :
             .Length(100)
             .Not.Nullable()
             .Unique();
+        Map(x => x.Description)
+            .Length(4001); // anything over 4000 is nvarchar(max)
         Version(x => x.Version);
         References(x => x.From, "FromLocation")
             .Cascade.All();
