@@ -6,6 +6,6 @@ public class MyService
     
     public void WriteHello()
     {
-        log.Info("Hello from MyService.");
+        log.Warn("Hello from MyService.");
     }
 }

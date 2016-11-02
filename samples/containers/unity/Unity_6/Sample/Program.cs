@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using NServiceBus;
+using NServiceBus.Logging;
 
 static class Program
 {
     static void Main()
     {
         Console.Title = "Samples.Unity";
+
+        LogManager.Use<DefaultFactory>().Level(LogLevel.Warn);
 
         using (var container = new UnityContainer())
         {
@@ -16,18 +19,21 @@ static class Program
             var endpointNames = new[]
             {
                 "a",
-                "b"
+                "b",
+                "c",
+                "d",
+                "e"
             };
 
-            var instances = new List<IBus>();
-            foreach (var endpointName in endpointNames)
+            Parallel.ForEach(endpointNames, endpointName =>
             {
+                var childContainer = container.CreateChildContainer();
                 var busConfiguration = new BusConfiguration();
                 busConfiguration.EndpointName(endpointName);
                 busConfiguration.UseContainer<UnityBuilder>(
                     customizations: customizations =>
                     {
-                        customizations.UseExistingContainer(container.CreateChildContainer());
+                        customizations.UseExistingContainer(childContainer);
                     });
 
 
@@ -36,22 +42,13 @@ static class Program
                 busConfiguration.EnableInstallers();
 
                 var instance = Bus.Create(busConfiguration).Start();
-                instances.Add(instance);
-            }
+                childContainer.RegisterInstance(instance, new ContainerControlledLifetimeManager()); // instance is incorrectly registered by NServiceBus V5
 
-            Console.WriteLine("Sending local message on each instance...");
-
-            foreach (var instance in instances)
-            {
-                var myMessage = new MyMessage();
-                instance.SendLocal(myMessage);
-            }
+                instance.SendLocal(new MyMessage());
+            });
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
-            
-            // Line below should not be needed as the container should dispose the instance.
-            //foreach (var instance in instances) instance.Dispose();
         }
     }
 }
