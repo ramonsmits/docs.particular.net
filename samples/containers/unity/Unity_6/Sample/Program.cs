@@ -9,47 +9,49 @@ static class Program
     {
         Console.Title = "Samples.Unity";
 
-
-        var container = new UnityContainer();
-        container.RegisterInstance(new MyService());
-
-        var endpointNames = new[]
+        using (var container = new UnityContainer())
         {
-            "a",
-            "b"
-        };
+            container.RegisterInstance(new MyService());
 
-        var instances = new List<IBus>();
-        foreach (var endpointName in endpointNames)
-        {
-            var busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName(endpointName);
-            busConfiguration.UseContainer<UnityBuilder>(
-                customizations: customizations =>
-                {
-                    customizations.UseExistingContainer(container.CreateChildContainer());
-                });
+            var endpointNames = new[]
+            {
+                "a",
+                "b"
+            };
+
+            var instances = new List<IBus>();
+            foreach (var endpointName in endpointNames)
+            {
+                var busConfiguration = new BusConfiguration();
+                busConfiguration.EndpointName(endpointName);
+                busConfiguration.UseContainer<UnityBuilder>(
+                    customizations: customizations =>
+                    {
+                        customizations.UseExistingContainer(container.CreateChildContainer());
+                    });
 
 
-            busConfiguration.UseSerialization<JsonSerializer>();
-            busConfiguration.UsePersistence<InMemoryPersistence>();
-            busConfiguration.EnableInstallers();
+                busConfiguration.UseSerialization<JsonSerializer>();
+                busConfiguration.UsePersistence<InMemoryPersistence>();
+                busConfiguration.EnableInstallers();
 
-            var instance = Bus.Create(busConfiguration).Start();
-            instances.Add(instance);
+                var instance = Bus.Create(busConfiguration).Start();
+                instances.Add(instance);
+            }
+
+            Console.WriteLine("Sending local message on each instance...");
+
+            foreach (var instance in instances)
+            {
+                var myMessage = new MyMessage();
+                instance.SendLocal(myMessage);
+            }
+
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+            
+            // Line below should not be needed as the container should dispose the instance.
+            //foreach (var instance in instances) instance.Dispose();
         }
-
-        Console.WriteLine("Sending local message on each instance...");
-
-        foreach (var instance in instances)
-        {
-            var myMessage = new MyMessage();
-            instance.SendLocal(myMessage);
-        }
-
-        Console.WriteLine("Press any key to exit");
-        Console.ReadKey();
-
-        foreach (var instance in instances) instance.Dispose();
     }
 }
