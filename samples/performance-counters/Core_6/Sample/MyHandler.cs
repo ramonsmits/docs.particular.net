@@ -14,10 +14,11 @@ public class MyHandler :
 
     public Task Handle(MyMessage message, IMessageHandlerContext context)
     {
-        var delay = 1000;
-        var spread = 200;
-        var sleepTime = random.Next(delay - spread, delay + spread);
-        log.Info($"Hello from MyHandler. Sleeping for {sleepTime}ms");
+        //var spread = Math.Min(500, Program.processDelay);
+        //var sleepTime = random.Next(Program.processDelay - spread, Program.processDelay + spread);
+        var sleepTime = Program.processDelay;
+        //log.Info($"Hello from MyHandler. Sleeping for {sleepTime}ms");
+        Console.Write("■");
         return Task.Delay(sleepTime);
     }
 

@@ -12,68 +12,99 @@ class Program
 
     static IEndpointInstance endpointInstance;
 
+    static int ReadValue(int defaultValue)
+    {
+        var v = Console.ReadLine();
+        return v.Length == 0 ? defaultValue : int.Parse(v);
+    }
+
     static async Task AsyncMain()
     {
-        Console.Title = "Samples.PerfCounters";
+        var concurrency = 1;
+        Console.Write($"Concurrency [{concurrency}]:");
+        concurrency = ReadValue(concurrency);
+        //Console.WriteLine();
+
+        var sla = 100;
+        Console.Write($"SLA in seconds [{sla}]:");
+        sla = ReadValue(sla);
+        //Console.WriteLine();
+
+
+
         var endpointConfiguration = new EndpointConfiguration("Samples.PerfCounters");
         endpointConfiguration.UseSerialization<JsonSerializer>();
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
         endpointConfiguration.SendFailedMessagesTo("error");
 
+        endpointConfiguration.UseTransport<MsmqTransport>().ConnectionString("journal=false;deadLetter=false");
         #region enable-counters
-        endpointConfiguration.PurgeOnStartup(true);
+        Console.Write("Purge? [Y]:");
+        var key = Console.ReadKey().Key;
+        if (key == ConsoleKey.Y || key == ConsoleKey.Enter) endpointConfiguration.PurgeOnStartup(true);
+        Console.WriteLine();
+
         endpointConfiguration.EnableCriticalTimePerformanceCounter();
-        endpointConfiguration.EnableSLAPerformanceCounter(TimeSpan.FromSeconds(100));
-        endpointConfiguration.LimitMessageProcessingConcurrencyTo(1);
+        endpointConfiguration.EnableSLAPerformanceCounter(TimeSpan.FromSeconds(sla));
+        endpointConfiguration.LimitMessageProcessingConcurrencyTo(concurrency);
         #endregion
 
         endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
         try
         {
             Console.WriteLine("Press UP/DOWN to increment/decrement send delay");
+            Console.WriteLine("Press RIGHT/LEFT to increment/decrement processing delay");
             Console.WriteLine("Press any key to exit");
 
             var loop = Task.Run(Loop);
 
             while (true)
             {
-                var key = Console.ReadKey();
+                Console.Title = $"Samples.PerfCounters | send delay: {sendDelay}ms, process delay: {processDelay}ms, concurrency: {concurrency}, SLA: {sla}s";
+                key = Console.ReadKey().Key;
                 Console.WriteLine();
 
-                switch (key.Key)
+                switch (key)
                 {
-                    case ConsoleKey.UpArrow:
-                        if(delay>100) delay -= 100;
-                        Console.WriteLine($"Delay: {delay}ms");
-                        break;
                     case ConsoleKey.DownArrow:
-                        delay += 100;
-                        Console.WriteLine($"Delay: {delay}ms");
+                        if (sendDelay > stepSize) sendDelay -= stepSize;
+                        Console.WriteLine($"Send delay: {sendDelay}ms");
+                        break;
+                    case ConsoleKey.UpArrow:
+                        sendDelay += stepSize;
+                        Console.WriteLine($"Send delay: {sendDelay}ms");
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        if (processDelay > stepSize) processDelay -= stepSize;
+                        Console.WriteLine($"Process delay: {processDelay}ms");
+                        break;
+                    case ConsoleKey.RightArrow:
+                        processDelay += stepSize;
+                        Console.WriteLine($"Process delay: {processDelay}ms");
                         break;
                     default:
-                        Console.WriteLine(key.Key);
                         return;
                 }
             }
         }
         finally
         {
-            await endpointInstance.Stop()
-                .ConfigureAwait(false);
+            await endpointInstance.Stop().ConfigureAwait(false);
         }
     }
 
-
-    static int delay = 1000;
+    static int stepSize = 50;
+    public static int processDelay = 100;
+    static int sendDelay = 1000;
 
     static async Task Loop()
     {
         while (true)
         {
-            Console.WriteLine("Sending message");
+            Console.Write("·");
             await endpointInstance.SendLocal(new MyMessage());
-            await Task.Delay(delay).ConfigureAwait(false);
+            await Task.Delay(sendDelay).ConfigureAwait(false);
         }
     }
 }
