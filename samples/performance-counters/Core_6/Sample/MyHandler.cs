@@ -14,8 +14,10 @@ public class MyHandler :
 
     public Task Handle(MyMessage message, IMessageHandlerContext context)
     {
-        var sleepTime = random.Next(1, 1000);
-        log.Info($"Hello from MyHandler. Slept for {sleepTime}ms");
+        var delay = 1000;
+        var spread = 200;
+        var sleepTime = random.Next(delay - spread, delay + spread);
+        log.Info($"Hello from MyHandler. Sleeping for {sleepTime}ms");
         return Task.Delay(sleepTime);
     }
 

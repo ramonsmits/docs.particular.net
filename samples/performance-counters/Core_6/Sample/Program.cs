@@ -10,6 +10,8 @@ class Program
         AsyncMain().GetAwaiter().GetResult();
     }
 
+    static IEndpointInstance endpointInstance;
+
     static async Task AsyncMain()
     {
         Console.Title = "Samples.PerfCounters";
@@ -20,31 +22,38 @@ class Program
         endpointConfiguration.SendFailedMessagesTo("error");
 
         #region enable-counters
+        endpointConfiguration.PurgeOnStartup(true);
         endpointConfiguration.EnableCriticalTimePerformanceCounter();
         endpointConfiguration.EnableSLAPerformanceCounter(TimeSpan.FromSeconds(100));
+        endpointConfiguration.LimitMessageProcessingConcurrencyTo(1);
         #endregion
 
-        var endpointInstance = await Endpoint.Start(endpointConfiguration)
-            .ConfigureAwait(false);
+        endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
         try
         {
-            Console.WriteLine("Press enter to send 10 messages with random sleep");
+            Console.WriteLine("Press UP/DOWN to increment/decrement send delay");
             Console.WriteLine("Press any key to exit");
+
+            var loop = Task.Run(Loop);
 
             while (true)
             {
                 var key = Console.ReadKey();
                 Console.WriteLine();
 
-                if (key.Key != ConsoleKey.Enter)
+                switch (key.Key)
                 {
-                    break;
-                }
-                for (var i = 0; i < 10; i++)
-                {
-                    var myMessage = new MyMessage();
-                    await endpointInstance.SendLocal(myMessage)
-                        .ConfigureAwait(false);
+                    case ConsoleKey.UpArrow:
+                        if(delay>100) delay -= 100;
+                        Console.WriteLine($"Delay: {delay}ms");
+                        break;
+                    case ConsoleKey.DownArrow:
+                        delay += 100;
+                        Console.WriteLine($"Delay: {delay}ms");
+                        break;
+                    default:
+                        Console.WriteLine(key.Key);
+                        return;
                 }
             }
         }
@@ -52,6 +61,19 @@ class Program
         {
             await endpointInstance.Stop()
                 .ConfigureAwait(false);
+        }
+    }
+
+
+    static int delay = 1000;
+
+    static async Task Loop()
+    {
+        while (true)
+        {
+            Console.WriteLine("Sending message");
+            await endpointInstance.SendLocal(new MyMessage());
+            await Task.Delay(delay).ConfigureAwait(false);
         }
     }
 }
