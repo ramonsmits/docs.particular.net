@@ -55,33 +55,36 @@ class Program
         {
             Console.WriteLine("Press UP/DOWN to increment/decrement send delay");
             Console.WriteLine("Press RIGHT/LEFT to increment/decrement processing delay");
+            Console.WriteLine("Press +/- to increment/decrement step size");
             Console.WriteLine("Press any key to exit");
 
             var loop = Task.Run(Loop);
 
             while (true)
             {
-                Console.Title = $"Samples.PerfCounters | send delay: {sendDelay}ms, process delay: {processDelay}ms, concurrency: {concurrency}, SLA: {sla}s";
+                Console.Title = $"Samples.PerfCounters | send delay: {sendDelay:N0}ms, process delay: {processDelay:N0}ms, step size: {stepSize:N0}ms, concurrency: {concurrency:N0}, SLA: {sla:N0}s";
                 key = Console.ReadKey().Key;
-                Console.WriteLine();
 
                 switch (key)
                 {
                     case ConsoleKey.DownArrow:
                         if (sendDelay > stepSize) sendDelay -= stepSize;
-                        Console.WriteLine($"Send delay: {sendDelay}ms");
                         break;
                     case ConsoleKey.UpArrow:
                         sendDelay += stepSize;
-                        Console.WriteLine($"Send delay: {sendDelay}ms");
                         break;
                     case ConsoleKey.LeftArrow:
                         if (processDelay > stepSize) processDelay -= stepSize;
-                        Console.WriteLine($"Process delay: {processDelay}ms");
                         break;
                     case ConsoleKey.RightArrow:
                         processDelay += stepSize;
-                        Console.WriteLine($"Process delay: {processDelay}ms");
+                        break;
+                    case ConsoleKey.OemPlus:
+                        if (stepSize < 10000) stepSize *= 10;
+                        
+                        break;
+                    case ConsoleKey.OemMinus:
+                        if (stepSize > 10) stepSize /= 10;
                         break;
                     default:
                         return;
@@ -94,7 +97,7 @@ class Program
         }
     }
 
-    static int stepSize = 50;
+    static int stepSize = 100;
     public static int processDelay = 100;
     static int sendDelay = 1000;
 
