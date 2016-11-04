@@ -1,1 +1,0 @@
-This is done by keeping a reference to the `IDisposable` object returned from calling the `Subscribe` method on the [IObservable](https://msdn.microsoft.com/en-us/library/dd782981.aspx) and calling its `Dispose` method.

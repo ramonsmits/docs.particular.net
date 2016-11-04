@@ -1,1 +1,0 @@
-Users can take advantage of this NServiceBus-managed data access context via `SynchronizedStorageSession` object returned by `SynchronizedStorageSession()` extension method on the message handling context. This object is a hook for persistence-specific extension methods that allow to obtain the connection to underlying data store. 

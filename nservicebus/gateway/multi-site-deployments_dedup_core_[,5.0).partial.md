@@ -1,1 +1,0 @@
-By default, NServiceBus uses [RavenDB](/nservicebus/ravendb/) to store the IDs but [InMemory](/nservicebus/persistence/in-memory.md) and [NHibernate](/nservicebus/nhibernate/) persistences are supported as well.

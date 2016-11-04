@@ -1,1 +1,0 @@
-An environment variable named `AzureStoragePersistence.ConnectionString` with the connection string for the Azure Storage account.

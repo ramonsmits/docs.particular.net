@@ -1,1 +1,0 @@
-Because the distribution strategy is invoked for each outgoing message, it is important to keep it as fast as possible, sometimes trading off accuracy for performance.

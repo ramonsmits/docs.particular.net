@@ -1,2 +1,0 @@
-EndpointsMonitor\EndpointsMonitor.csproj
-NServiceBusEndpoint\NServiceBusEndpoint.csproj

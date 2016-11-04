@@ -1,1 +1,0 @@
-NOTE: Instances of `IWantToRunWhenConfigurationIsComplete` are registered in the [Container](/nservicebus/containers/) before instances of `INeedInitialization` are created and run.

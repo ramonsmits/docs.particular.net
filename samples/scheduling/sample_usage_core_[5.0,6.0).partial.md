@@ -1,1 +1,0 @@
-The scheduling API is accessed via a [dependency injected](/nservicebus/containers/) instance of the `Schedule` class. In this case running at startup by implementing [IWantToRunWhenConfigurationIsComplete](/nservicebus/lifecycle/iwanttorunwhenconfigurationiscomplete.md).
