@@ -1,26 +1,43 @@
+using System;
 using NServiceBus;
 using System.Threading.Tasks;
+using NHibernate;
 using NServiceBus.Logging;
 
 #region RequestDataMessageHandler
 
-public class RequestDataMessageHandler :
+class RequestDataMessageHandler :
     IHandleMessages<RequestDataMessage>
 #endregion
 {
     static ILog log = LogManager.GetLogger<RequestDataMessageHandler>();
 
+    public ISession Session { get; set; }
+    public QuerySession UncommittedSession { get; set; }
+
     public async Task Handle(RequestDataMessage message, IMessageHandlerContext context)
     {
         log.Info($"Received request {message.DataId}.");
-        log.Info($"String received: {message.String}.");
 
+        var readEntity = UncommittedSession.Session.Get<Customer>(message.DataId);
+        var entity = Session.Get<Customer>(message.DataId);
+
+        UncommittedSession.Session.Save(new Customer
+        {
+            Id = Guid.NewGuid(),
+            Name = "Ramon"
+        });
+
+        if (null == entity)
+        {
+            
+        }
         #region DataResponseReply
 
         var response = new DataResponseMessage
         {
-            DataId = message.DataId,
-            String = message.String
+            DataId = entity?.Id,
+            String = entity?.Name
         };
 
         await context.Reply(response)

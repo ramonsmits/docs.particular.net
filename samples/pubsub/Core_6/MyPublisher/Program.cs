@@ -41,6 +41,7 @@ static class Program
 
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.EnableInstallers();
+        endpointConfiguration.UseTransport<RabbitMQTransport>().ConnectionString("host=localhost");
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);

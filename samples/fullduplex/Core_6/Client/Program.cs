@@ -41,12 +41,11 @@ class Program
                     return;
                 }
                 var guid = Guid.NewGuid();
-                Console.WriteLine($"Requesting to get data by id: {guid.ToString("N")}");
+                Console.WriteLine($"Requesting to get data by id: {guid:N}");
 
                 var message = new RequestDataMessage
                 {
                     DataId = guid,
-                    String = "String property value"
                 };
                 await endpointInstance.Send("Samples.FullDuplex.Server", message)
                     .ConfigureAwait(false);

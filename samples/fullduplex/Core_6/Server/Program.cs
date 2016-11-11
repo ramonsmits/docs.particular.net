@@ -14,13 +14,15 @@ class Program
     static async Task AsyncMain()
     {
         Console.Title = "Samples.FullDuplex.Server";
-        LogManager.Use<DefaultFactory>()
-            .Level(LogLevel.Info);
+        LogManager.Use<DefaultFactory>().Level(LogLevel.Debug);
+
         var endpointConfiguration = new EndpointConfiguration("Samples.FullDuplex.Server");
         endpointConfiguration.UseSerialization<JsonSerializer>();
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.SendFailedMessagesTo("error");
+
+        endpointConfiguration.ConfigureQuerySession();
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
@@ -36,3 +38,4 @@ class Program
         }
     }
 }
+

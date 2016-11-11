@@ -1,6 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using NServiceBus;
+using NServiceBus.Extensibility;
+using NSubstitute;
+using NUnit.Framework;
 
 class Program
 {

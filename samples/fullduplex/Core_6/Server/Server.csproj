@@ -30,15 +30,36 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate.Mapping.Attributes, Version=4.0.0.1, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\NHibernate.Mapping.Attributes.4.0.0.1\lib\net40\NHibernate.Mapping.Attributes.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\..\..\packages\NServiceBus.6.0.0\lib\net452\NServiceBus.Core.dll</HintPath>
     </Reference>
+    <Reference Include="NServiceBus.NHibernate, Version=7.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\NServiceBus.NHibernate.7.0.1\lib\net452\NServiceBus.NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer.cs" />
+    <Compile Include="EndpointConfigurationExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="RequestDataMessageHandler.cs" />
+    <Compile Include="UnitOfWorkBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj">
@@ -47,7 +68,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

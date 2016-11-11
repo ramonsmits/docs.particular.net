@@ -19,6 +19,8 @@ static class Program
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.EnableInstallers();
+        endpointConfiguration.Recoverability().Delayed(c => c.NumberOfRetries(0));
+        endpointConfiguration.UseTransport<RabbitMQTransport>().ConnectionString("host=localhost");
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);

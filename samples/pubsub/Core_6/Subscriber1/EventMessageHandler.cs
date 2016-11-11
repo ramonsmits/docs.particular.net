@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using NServiceBus;
 using NServiceBus.Logging;
@@ -12,6 +13,7 @@ public class EventMessageHandler :
         log.Info($"Subscriber 1 received EventMessage with Id {message.EventId}.");
         log.Info($"Message time: {message.Time}.");
         log.Info($"Message duration: {message.Duration}.");
-        return Task.CompletedTask;
+        throw new Exception("Boom baby! Fucking yeah!");
+        //return Task.CompletedTask;
     }
 }
