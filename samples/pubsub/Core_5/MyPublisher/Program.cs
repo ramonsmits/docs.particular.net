@@ -14,6 +14,7 @@ static class Program
         busConfiguration.UseSerialization<JsonSerializer>();
         busConfiguration.UsePersistence<InMemoryPersistence>();
         busConfiguration.EnableInstallers();
+        busConfiguration.UseTransport<RabbitMQTransport>().ConnectionString("host=localhost");
         using (var bus = Bus.Create(busConfiguration).Start())
         {
             Start(bus);

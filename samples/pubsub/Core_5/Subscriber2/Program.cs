@@ -15,6 +15,8 @@ static class Program
         busConfiguration.DisableFeature<AutoSubscribe>();
         busConfiguration.UsePersistence<InMemoryPersistence>();
         busConfiguration.EnableInstallers();
+        busConfiguration.UseTransport<RabbitMQTransport>().ConnectionString("host=localhost");
+        busConfiguration.DisableFeature<SecondLevelRetries>();
         using (var bus = Bus.Create(busConfiguration).Start())
         {
             bus.Subscribe<IMyEvent>();

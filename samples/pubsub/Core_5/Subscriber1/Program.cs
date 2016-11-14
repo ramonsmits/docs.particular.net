@@ -1,5 +1,6 @@
 using System;
 using NServiceBus;
+using NServiceBus.Features;
 using NServiceBus.Logging;
 
 static class Program
@@ -14,6 +15,8 @@ static class Program
         busConfiguration.UseSerialization<JsonSerializer>();
         busConfiguration.UsePersistence<InMemoryPersistence>();
         busConfiguration.EnableInstallers();
+        busConfiguration.UseTransport<RabbitMQTransport>().ConnectionString("host=localhost");
+        busConfiguration.DisableFeature<SecondLevelRetries>();
         using (Bus.Create(busConfiguration).Start())
         {
             Console.WriteLine("Press any key to exit");
