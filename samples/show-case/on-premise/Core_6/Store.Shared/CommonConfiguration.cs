@@ -27,5 +27,10 @@ public static class CommonConfiguration
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.CustomCheckPlugin("particular.servicecontrol");
+
+        endpointConfiguration.Recoverability()
+            .Immediate(c => c.NumberOfRetries(1))
+            .Delayed(c => c.NumberOfRetries(5).TimeIncrease(TimeSpan.FromSeconds(1)));
+
     }
 }
