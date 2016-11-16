@@ -2,6 +2,8 @@
 using System.Text;
 using NServiceBus;
 using NServiceBus.Encryption.MessageProperty;
+using NLog;
+using System.Threading.Tasks;
 
 public static class CommonConfiguration
 {
@@ -31,6 +33,21 @@ public static class CommonConfiguration
         endpointConfiguration.Recoverability()
             .Immediate(c => c.NumberOfRetries(1))
             .Delayed(c => c.NumberOfRetries(5).TimeIncrease(TimeSpan.FromSeconds(1)));
+
+        endpointConfiguration.DefineCriticalErrorAction(ctx =>
+        {
+            try
+            {
+                LogManager.GetLogger("CriticalError").Fatal("CriticalError", ctx.Exception);
+                LoggingConfiguration.Teardown();
+                return Task.CompletedTask;
+            }
+            finally
+            {
+                Environment.FailFast("NServiceBus CriticalError", ctx.Exception);
+            }
+        });
+
 
     }
 }

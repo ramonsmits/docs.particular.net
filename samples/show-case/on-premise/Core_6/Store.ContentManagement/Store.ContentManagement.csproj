@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Store.Messages\Store.Messages.csproj" />
     <ProjectReference Include="..\Store.Shared\Store.Shared.csproj" />
+    <PackageReference Include="NLog" Version="4.*" />
     <PackageReference Include="NServiceBus" Version="6.*" />
     <PackageReference Include="NServiceBus.Encryption.MessageProperty" Version="1.*" />
     <PackageReference Include="Iesi.Collections" Version="4.*" />
@@ -17,5 +18,6 @@
     <PackageReference Include="ServiceControl.Plugin.Nsb6.CustomChecks" Version="2.*" />
     <PackageReference Include="ServiceControl.Plugin.Nsb6.Heartbeat" Version="2.*" />
     <PackageReference Include="ServiceControl.Plugin.Nsb6.SagaAudit" Version="2.*" />
+    <PackageReference Include="NServiceBus.NLog" Version="2.*" />
   </ItemGroup>
 </Project>

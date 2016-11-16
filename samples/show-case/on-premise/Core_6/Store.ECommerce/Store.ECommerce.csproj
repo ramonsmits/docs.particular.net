@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="System.Configuration" />
+    <PackageReference Include="NLog" Version="4.*" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.*" />
     <PackageReference Include="Microsoft.AspNet.Razor" Version="3.*" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.*" />

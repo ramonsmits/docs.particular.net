@@ -22,6 +22,8 @@ public class MvcApplication :
 
     static async Task AsyncStart()
     {
+        LoggingConfiguration.Setup();
+
         var endpointConfiguration = new EndpointConfiguration("Store.ECommerce");
         endpointConfiguration.PurgeOnStartup(true);
         endpointConfiguration.ApplyCommonConfiguration(transport =>

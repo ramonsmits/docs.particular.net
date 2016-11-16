@@ -8,6 +8,8 @@ class Program
     static async Task Main()
     {
         Console.Title = "Samples.Store.ContentManagement";
+        LoggingConfiguration.Setup();
+
         var endpointConfiguration = new EndpointConfiguration("Store.ContentManagement");
         endpointConfiguration.ApplyCommonConfiguration(
             transport =>

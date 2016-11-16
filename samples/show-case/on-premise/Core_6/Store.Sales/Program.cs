@@ -7,6 +7,8 @@ class Program
     static async Task Main()
     {
         Console.Title = "Samples.Store.Sales";
+        LoggingConfiguration.Setup();
+
         var endpointConfiguration = new EndpointConfiguration("Store.Sales");
         endpointConfiguration.ApplyCommonConfiguration();
 
