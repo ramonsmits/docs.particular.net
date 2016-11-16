@@ -79,9 +79,9 @@ public class ProcessOrderSaga :
     public class OrderData :
         ContainSagaData
     {
-        public int OrderNumber { get; set; }
-        public string[] ProductIds { get; set; }
-        public string ClientId { get; set; }
+        public virtual int OrderNumber { get; set; }
+        public virtual string[] ProductIds { get; set; }
+        public virtual string ClientId { get; set; }
     }
 
     public class BuyersRemorseIsOver
