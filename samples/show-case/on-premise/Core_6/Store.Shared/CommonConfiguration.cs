@@ -27,7 +27,6 @@ public static class CommonConfiguration
 
         endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.EnableInstallers();
         endpointConfiguration.CustomCheckPlugin("particular.servicecontrol");
 
         endpointConfiguration.Recoverability()
@@ -38,7 +37,7 @@ public static class CommonConfiguration
         {
             try
             {
-                LogManager.GetLogger("CriticalError").Fatal("CriticalError", ctx.Exception);
+                LogManager.GetLogger("CriticalError").Fatal(ctx.Exception, "CriticalError");
                 LoggingConfiguration.Teardown();
                 return Task.CompletedTask;
             }
@@ -48,6 +47,8 @@ public static class CommonConfiguration
             }
         });
 
+        if (System.Diagnostics.Debugger.IsAttached) endpointConfiguration.EnableInstallers();
 
+        transport.ApplyLabelToMessages(headers => (headers.ContainsKey(Headers.EnclosedMessageTypes) ? headers[Headers.EnclosedMessageTypes].Substring(0, Math.Min(200, headers[Headers.EnclosedMessageTypes].Length)) + "@" : string.Empty) + DateTime.UtcNow.ToString("O"));
     }
 }
