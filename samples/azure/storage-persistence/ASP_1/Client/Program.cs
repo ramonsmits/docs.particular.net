@@ -41,8 +41,12 @@ class Program
                 {
                     OrderId = orderId
                 };
-                await endpointInstance.Send(startOrder)
-                    .ConfigureAwait(false);
+
+                await Task.WhenAll(
+                    endpointInstance.Send(startOrder),
+                    endpointInstance.Send(startOrder)
+                    ).ConfigureAwait(false);
+                    
                 Console.WriteLine($"StartOrder Message sent with OrderId {orderId}");
             }
         }
