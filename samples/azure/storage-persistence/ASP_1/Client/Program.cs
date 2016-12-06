@@ -44,6 +44,8 @@ class Program
 
                 await Task.WhenAll(
                     endpointInstance.Send(startOrder),
+                    endpointInstance.Send(startOrder),
+                    endpointInstance.Send(startOrder),
                     endpointInstance.Send(startOrder)
                     ).ConfigureAwait(false);
                     

@@ -8,26 +8,29 @@ using NServiceBus.Logging;
 public class OrderSaga :
     Saga<OrderSagaData>,
     IAmStartedByMessages<StartOrder>,
-    IHandleTimeouts<CompleteOrder>
+    IHandleMessages<DoYourThingResponse>
 {
     static ILog log = LogManager.GetLogger<OrderSaga>();
 
     protected override void ConfigureHowToFindSaga(SagaPropertyMapper<OrderSagaData> mapper)
     {
-        mapper.ConfigureMapping<StartOrder>(message => message.OrderId)
-            .ToSaga(sagaData => sagaData.OrderId);
+        mapper.ConfigureMapping<StartOrder>(message => message.OrderId).ToSaga(sagaData => sagaData.OrderId);
+        mapper.ConfigureMapping<DoYourThingResponse>(message => message.OrderId).ToSaga(sagaData => sagaData.OrderId);
     }
 
     public async Task Handle(StartOrder message, IMessageHandlerContext context)
     {
-        if (!string.IsNullOrEmpty(Data.OrderDescription))
+        Data.Count++;
+
+        if (Data.Count > 1)
         {
-            Console.WriteLine("Already started");
-            return;
+            return; // Means that we are already processing, we need to wait until that completed.
         }
-        await context.SendLocal(new DoYourThing());
 
         Data.OrderId = message.OrderId;
+
+        await context.SendLocal(new DoYourThing { OrderId = Data.OrderId });
+
         var orderDescription = $"The saga for order {message.OrderId}";
         Data.OrderDescription = orderDescription;
         log.Info($"Received StartOrder message {Data.OrderId}. Starting Saga");
@@ -39,34 +42,43 @@ public class OrderSaga :
 
         await Task.Delay(1000).ConfigureAwait(false);
         Console.WriteLine("Done");
-
-        await RequestTimeout(context, TimeSpan.FromSeconds(15), timeoutData).ConfigureAwait(false);
     }
 
-    public async Task Timeout(CompleteOrder state, IMessageHandlerContext context)
+    public async Task Handle(DoYourThingResponse message, IMessageHandlerContext context)
     {
-        log.Info($"Saga with OrderId {Data.OrderId} completed");
-        var orderCompleted = new OrderCompleted
+        Data.Count--;
+        if (Data.Count == 0)
         {
-            OrderId = Data.OrderId
-        };
-        await context.Publish(orderCompleted)
-            .ConfigureAwait(false);
-        MarkAsComplete();
+            // No more work to do
+            Console.WriteLine("Done!");
+            MarkAsComplete();
+        }
+        else
+        {
+            // Task for ID buffered, invoking again.
+            await context.SendLocal(new DoYourThing { OrderId = Data.OrderId });
+        }
     }
 }
 
-class DoYourThing : ICommand
+public class DoYourThing : ICommand
 {
-    
+    public Guid OrderId { get; set; }
+}
+
+public class DoYourThingResponse : IMessage
+{
+    public Guid OrderId { get; set; }
 }
 
 class DoYourThingHandler : IHandleMessages<DoYourThing>
 {
-    public Task Handle(DoYourThing message, IMessageHandlerContext context)
+    public async Task Handle(DoYourThing message, IMessageHandlerContext context)
     {
-        Console.WriteLine("Happy dance!");
-        return Task.FromResult(0);
+        Console.WriteLine($"Happy dance starting for {message.OrderId}!");
+        await Task.Delay(3000).ConfigureAwait(false);
+        await context.Reply(new DoYourThingResponse { OrderId = message.OrderId }).ConfigureAwait(false);
+        Console.WriteLine($"Happy dance completed for {message.OrderId}!");
     }
 }
 #endregion

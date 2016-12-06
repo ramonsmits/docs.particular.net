@@ -11,5 +11,6 @@ public class OrderSagaData :
     public string OriginalMessageId { get; set; }
     public Guid OrderId { get; set; }
     public string OrderDescription { get; set; }
+    public int Count { get; set; }
 }
 #endregion
