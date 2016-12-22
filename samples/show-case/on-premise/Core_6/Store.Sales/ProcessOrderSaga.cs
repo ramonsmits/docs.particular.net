@@ -13,6 +13,7 @@ public class ProcessOrderSaga :
     IHandleTimeouts<ProcessOrderSaga.BuyersRemorseIsOver>
 {
     static ILog log = LogManager.GetLogger<ProcessOrderSaga>();
+    static readonly TimeSpan BuyersRemorseDuration = TimeSpan.FromSeconds(5);
 
     public Task Handle(SubmitOrder message, IMessageHandlerContext context)
     {
@@ -25,8 +26,8 @@ public class ProcessOrderSaga :
         Data.ProductIds = message.ProductIds;
         Data.ClientId = message.ClientId;
 
-        log.Info($"Starting cool down period for order #{Data.OrderNumber}.");
-        return RequestTimeout(context, TimeSpan.FromSeconds(20), new BuyersRemorseIsOver());
+        log.InfoFormat($"Starting cool down period of {1} for order #{0}.", Data.OrderNumber, BuyersRemorseDuration);
+        return RequestTimeout(context, BuyersRemorseDuration, new BuyersRemorseIsOver());
     }
 
     public Task Timeout(BuyersRemorseIsOver state, IMessageHandlerContext context)
