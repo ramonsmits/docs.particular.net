@@ -18,7 +18,7 @@ class ChaosHandler : IHandleMessages<object>
             result = Random.NextDouble();
         }
 
-        if (result < Thresshold) throw new Exception("Random chaos");
+        if (result < Thresshold) throw new Exception($"Random chaos ({Thresshold * 100:N}% failure)");
         return Task.FromResult(0);
     }
 }
