@@ -20,8 +20,8 @@ class Program
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
-        Console.WriteLine("Press any key to exit");
-        Console.ReadKey();
+        Console.WriteLine("Press Escape key to exit");
+        while (Console.ReadKey().Key != ConsoleKey.Escape) { }
         await endpointInstance.Stop()
             .ConfigureAwait(false);
     }
