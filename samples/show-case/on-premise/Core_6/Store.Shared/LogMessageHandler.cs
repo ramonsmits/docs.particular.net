@@ -5,8 +5,8 @@ using NServiceBus.Logging;
 
 class LogMessageHandler : IHandleMessages<object>
 {
-    static readonly bool IsDebugEnabled = Log.IsDebugEnabled;
     static readonly ILog Log = LogManager.GetLogger("ReceiveStats");
+    static readonly bool IsDebugEnabled = Log.IsDebugEnabled;
 
     public Task Handle(object message, IMessageHandlerContext context)
     {
