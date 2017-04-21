@@ -12,11 +12,11 @@ abstract class PerformanceCounterCheckBase : CustomCheck
     readonly ILog Log;
     static string HostName = System.Net.Dns.GetHostName();
 
-    protected PerformanceCounterCheckBase(long thresshold, string categoryName, string counterName)
+    protected PerformanceCounterCheckBase(long thresshold, string categoryName, string counterName, long intervalInSeconds = 60)
         : base(
             id: $"PerformanceCounter {categoryName}/{counterName}@{HostName}",
             category: "PerformanceCounter",
-            repeatAfter: TimeSpan.FromSeconds(5))
+            repeatAfter: TimeSpan.FromSeconds(intervalInSeconds))
     {
         Log = LogManager.GetLogger(GetType());
         Threshold = thresshold;
