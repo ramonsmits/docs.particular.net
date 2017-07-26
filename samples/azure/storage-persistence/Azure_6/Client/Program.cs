@@ -3,14 +3,12 @@ using NServiceBus;
 
 class Program
 {
-
     static void Main()
     {
         Console.Title = "Samples.Azure.StoragePersistence.Client";
         var busConfiguration = new BusConfiguration();
         busConfiguration.EndpointName("Samples.Azure.StoragePersistence.Client");
-        busConfiguration.UseSerialization<JsonSerializer>();
-        busConfiguration.EnableInstallers();
+        busConfiguration.ApplyGlobalSettings();
         busConfiguration.UsePersistence<InMemoryPersistence>();
 
         using (var bus = Bus.Create(busConfiguration).Start())
@@ -20,12 +18,24 @@ class Program
 
             while (true)
             {
-                var key = Console.ReadKey();
+                var key = Console.ReadKey().Key;
                 Console.WriteLine();
 
-                if (key.Key != ConsoleKey.Enter)
+                if (key == ConsoleKey.Escape)
                 {
                     return;
+                }
+
+                if (key == ConsoleKey.S)
+                {
+                    bus.Subscribe<OrderCompleted>();
+                    continue;
+                }
+
+                if (key == ConsoleKey.U)
+                {
+                    bus.Unsubscribe<OrderCompleted>();
+                    continue;
                 }
 
                 var orderId = Guid.NewGuid();

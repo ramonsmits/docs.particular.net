@@ -14,27 +14,41 @@ class Program
     {
         Console.Title = "Samples.Azure.StoragePersistence.Client";
         var endpointConfiguration = new EndpointConfiguration("Samples.Azure.StoragePersistence.Client");
-        endpointConfiguration.UseSerialization<JsonSerializer>();
-        endpointConfiguration.EnableInstallers();
-        endpointConfiguration.UsePersistence<InMemoryPersistence>();
-        endpointConfiguration.SendFailedMessagesTo("error");
-        var transport = endpointConfiguration.UseTransport<LearningTransport>();
+        var transport = endpointConfiguration.ApplyGlobalSettings();
+
         var routing = transport.Routing();
         routing.RouteToEndpoint(typeof(StartOrder), "Samples.Azure.StoragePersistence.Server");
+        routing.RegisterPublisher(typeof(OrderCompleted), "Samples.Azure.StoragePersistence.Server");
+
+        endpointConfiguration.UsePersistence<InMemoryPersistence>();
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
+
+
         Console.WriteLine("Press 'enter' to send a StartOrder messages");
         Console.WriteLine("Press any other key to exit");
 
         while (true)
         {
-            var key = Console.ReadKey();
+            var key = Console.ReadKey().Key;
             Console.WriteLine();
 
-            if (key.Key != ConsoleKey.Enter)
+            if (key == ConsoleKey.Escape)
             {
                 break;
+            }
+
+            if (key == ConsoleKey.S)
+            {
+                await endpointInstance.Subscribe<OrderCompleted>().ConfigureAwait(false);
+                continue;
+            }
+
+            if (key == ConsoleKey.U)
+            {
+                await endpointInstance.Unsubscribe<OrderCompleted>().ConfigureAwait(false);
+                continue;
             }
 
             var orderId = Guid.NewGuid();

@@ -15,21 +15,17 @@ class Program
     {
         Console.Title = "Samples.Azure.StoragePersistence.Server";
 
-        #region config
-
         var endpointConfiguration = new EndpointConfiguration("Samples.Azure.StoragePersistence.Server");
+        endpointConfiguration.ApplyGlobalSettings();
+
         var persistence = endpointConfiguration.UsePersistence<AzureStoragePersistence>();
         persistence.ConnectionString("UseDevelopmentStorage=true");
-
         endpointConfiguration.UsePersistence<AzureStoragePersistence, StorageType.Sagas>()
             .AssumeSecondaryIndicesExist();
 
-        #endregion
-
-        endpointConfiguration.UseSerialization<JsonSerializer>();
-        endpointConfiguration.EnableInstallers();
-        endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.UseTransport<LearningTransport>();
+        endpointConfiguration.UsePersistence<AzureStoragePersistence, StorageType.Subscriptions>()
+            //.TableName("subscriptions6")
+            ;
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
