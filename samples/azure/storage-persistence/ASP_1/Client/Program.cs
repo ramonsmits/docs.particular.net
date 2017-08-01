@@ -25,9 +25,10 @@ class Program
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
 
-
         Console.WriteLine("Press 'enter' to send a StartOrder messages");
-        Console.WriteLine("Press any other key to exit");
+        Console.WriteLine("Press 'S' to subscribe");
+        Console.WriteLine("Press 'U' to unsubscribe");
+        Console.WriteLine("Press 'ESC' to exit");
 
         while (true)
         {
