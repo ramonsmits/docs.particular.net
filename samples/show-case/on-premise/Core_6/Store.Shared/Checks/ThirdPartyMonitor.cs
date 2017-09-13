@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NServiceBus.Logging;
@@ -6,7 +7,7 @@ using ServiceControl.Plugin.CustomChecks;
 
 class ThirdPartyMonitor : CustomCheck
 {
-    const string url = "http://nas:5000";
+    const string url = "http://nas.corp.nbraceit.com:5000";
     static ILog log = LogManager.GetLogger<ThirdPartyMonitor>();
 
     public ThirdPartyMonitor()
@@ -19,12 +20,11 @@ class ThirdPartyMonitor : CustomCheck
 
     public override async Task<CheckResult> PerformCheck()
     {
+        var start = Stopwatch.StartNew();
         try
         {
-            using (var client = new HttpClient
-            {
-                Timeout = TimeSpan.FromSeconds(3),
-            })
+            if (DateTime.UtcNow.Minute % 2 == 0) throw new InvalidOperationException("Current minute is even so I'm failing.");
+            using (var client = new HttpClient { Timeout = TimeSpan.FromSeconds(30) })
             using (var response = await client.GetAsync(url)
                 .ConfigureAwait(false))
             {
@@ -40,7 +40,7 @@ class ThirdPartyMonitor : CustomCheck
         }
         catch (Exception exception)
         {
-            var error = $"Failed to contact '{url}'. Error: {exception.Message}";
+            var error = $"Failed to contact '{url}'. Duration: {start.Elapsed} Error: {exception.Message}";
             log.Info(error);
             return CheckResult.Failed(error);
         }
