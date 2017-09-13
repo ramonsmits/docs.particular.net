@@ -4,7 +4,7 @@ using NServiceBus;
 using NServiceBus.Encryption.MessageProperty;
 using NLog;
 using System.Threading.Tasks;
-//using NServiceBus.Persistence;
+using NServiceBus.Persistence;
 
 public static class CommonConfiguration
 {
@@ -18,7 +18,7 @@ public static class CommonConfiguration
         messageEndpointMappings?.Invoke(transport);
 
         var persistence = endpointConfiguration.UsePersistence<NHibernatePersistence>();
-        //persistence.ConnectionString(@"Data Source=.;Integrated Security=True;Database=nservicebus");
+        persistence.ConnectionString(@"Data Source=.;Integrated Security=True;Database=nservicebus");
 
         var defaultKey = "2015-10";
         var ascii = Encoding.ASCII;
