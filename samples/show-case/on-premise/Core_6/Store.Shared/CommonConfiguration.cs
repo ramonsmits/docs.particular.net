@@ -4,6 +4,7 @@ using NServiceBus;
 using NServiceBus.Encryption.MessageProperty;
 using NLog;
 using System.Threading.Tasks;
+//using NServiceBus.Persistence;
 
 public static class CommonConfiguration
 {
@@ -13,10 +14,11 @@ public static class CommonConfiguration
         )
     {
         var transport = endpointConfiguration.UseTransport<MsmqTransport>();
+
         messageEndpointMappings?.Invoke(transport);
 
         var persistence = endpointConfiguration.UsePersistence<NHibernatePersistence>();
-        //persistence.ConnectionString(@"Data Source=.\SQLEXPRESS;Integrated Security=True;Database=nservicebus");
+        //persistence.ConnectionString(@"Data Source=.;Integrated Security=True;Database=nservicebus");
 
         var defaultKey = "2015-10";
         var ascii = Encoding.ASCII;
@@ -50,5 +52,9 @@ public static class CommonConfiguration
         if (System.Diagnostics.Debugger.IsAttached) endpointConfiguration.EnableInstallers();
 
         transport.ApplyLabelToMessages(headers => (headers.ContainsKey(Headers.EnclosedMessageTypes) ? headers[Headers.EnclosedMessageTypes].Substring(0, Math.Min(200, headers[Headers.EnclosedMessageTypes].Length)) + "@" : string.Empty) + DateTime.UtcNow.ToString("O"));
+
+#pragma warning disable CS0618 // Type or member is obsolete
+        endpointConfiguration.EnableMetrics().SendMetricDataToServiceControl("Particular.ServiceControl.Monitoring", TimeSpan.FromSeconds(10));
+#pragma warning restore CS0618 // Type or member is obsolete
     }
 }
