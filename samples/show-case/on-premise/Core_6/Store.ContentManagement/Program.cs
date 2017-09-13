@@ -10,12 +10,18 @@ class Program
         Console.Title = "Samples.Store.ContentManagement";
         LoggingConfiguration.Setup();
 
+
+
+
         var endpointConfiguration = new EndpointConfiguration("Store.ContentManagement");
         endpointConfiguration.ApplyCommonConfiguration(
             transport =>
             {
                 var routing = transport.Routing();
-                routing.RouteToEndpoint(typeof(ProvisionDownloadRequest), "Store.Operations");
+                //            < add Assembly = "Store.Messages" Namespace =  Endpoint =  />
+                routing.RegisterPublisher(typeof(ProvisionDownloadRequest).Assembly, "Store.Messages.Events", "Store.Sales");
+                //            < add Assembly = "Store.Messages" Namespace = "" Endpoint = "Store.Operations" />
+                routing.RouteToEndpoint(typeof(ProvisionDownloadRequest).Assembly, "Store.Messages.RequestResponse", "Store.Operations");
             });
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
