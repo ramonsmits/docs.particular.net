@@ -7,7 +7,7 @@ class ChaosHandler : IHandleMessages<object>
 {
     static readonly ILog Log = LogManager.GetLogger<ChaosHandler>();
     static readonly Random Random = new Random();
-    static readonly double Thresshold = 0.8; // 80% failure
+    static readonly double Thresshold = 0.6; // 60% failure
 
     public Task Handle(object message, IMessageHandlerContext context)
     {
