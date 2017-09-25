@@ -10,13 +10,16 @@ class Program
         var endpointConfiguration = new EndpointConfiguration("Samples.NHibernate.Client");
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.UsePersistence<NHibernatePersistence>();
-        endpointConfiguration.UseTransport<LearningTransport>();
+        var t = endpointConfiguration.UseTransport<MsmqTransport>();
+        endpointConfiguration.SendFailedMessagesTo("error");
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
 
         Console.WriteLine("Press 'enter' to send a StartOrder messages");
         Console.WriteLine("Press any other key to exit");
+
+        var orderId = Guid.NewGuid();
 
         while (true)
         {
@@ -28,7 +31,6 @@ class Program
                 break;
             }
 
-            var orderId = Guid.NewGuid();
             var startOrder = new StartOrder
             {
                 OrderId = orderId
