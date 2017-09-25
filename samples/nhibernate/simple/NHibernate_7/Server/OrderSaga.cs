@@ -3,9 +3,11 @@ using System;
 using System.Threading.Tasks;
 using NServiceBus;
 using NServiceBus.Logging;
+using NServiceBus.SagaPersisters.NHibernate;
 
 #region OrderSaga
 
+[LockMode(LockModes.Upgrade)]
 public class OrderSaga :
     Saga<OrderSagaData>,
     IAmStartedByMessages<StartOrder>,
