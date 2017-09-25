@@ -15,7 +15,8 @@ public class ShipOrderHandler :
             ShippingDate = DateTime.UtcNow,
         };
 
-        session.Save(orderShipped);
+        
+        //session.Save(orderShipped); // Ignoring as we force dupes and this results already exists exception.
 
         return Task.CompletedTask;
     }
