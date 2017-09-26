@@ -8,6 +8,7 @@ using System.Web.Routing;
 using NServiceBus;
 using NServiceBus.Logging;
 using Store.Messages.Commands;
+using Store.Messages.Events;
 
 public class MvcApplication :
     HttpApplication
@@ -43,6 +44,8 @@ public class MvcApplication :
         {
             var routing = transport.Routing();
             routing.RouteToEndpoint(typeof(SubmitOrder).Assembly, "Store.Messages.Commands", "Store.Sales");
+            routing.RegisterPublisher(typeof(SubmitOrder).Assembly, "Store.Messages.Events", "Store.Sales");
+            routing.RegisterPublisher(typeof(DownloadIsReady), "Store.ContentManagement");
         });
 
         EndpointInstance = await Endpoint.Start(endpointConfiguration)
