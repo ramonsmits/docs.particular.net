@@ -97,3 +97,4 @@ src/scaffolding.config
 .idea/
 *.sln.iml
 PromotedSqlScripts/
+*.lock
