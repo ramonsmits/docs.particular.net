@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using NServiceBus;
 using NServiceBus.Logging;
 
@@ -8,7 +7,7 @@ public class SimpleMessageHandler :
 {
     static ILog log = LogManager.GetLogger<SimpleMessageHandler>();
 
-    public Task Handle(SimpleMessage message, IMessageHandlerContext context)
+    public void Handle(SimpleMessage message)
     {
         log.Info($"Received message with Id = {message.Id}.");
         throw new Exception("BOOM!");

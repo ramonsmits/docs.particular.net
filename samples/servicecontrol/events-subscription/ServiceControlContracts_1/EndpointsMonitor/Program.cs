@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Threading.Tasks;
 using NServiceBus;
 
 class Program
 {
-    static async Task Main()
+    static void Main()
     {
         Console.Title = "EndpointsMonitor";
-        var endpointConfiguration = new EndpointConfiguration("EndpointsMonitor");
+        var endpointConfiguration = new BusConfiguration();
+        endpointConfiguration.EndpointName("EndpointsMonitor");
         endpointConfiguration.UseSerialization<JsonSerializer>();
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
-        endpointConfiguration.SendFailedMessagesTo("error");
 
         var transport = endpointConfiguration.UseTransport<MsmqTransport>();
-        var routing = transport.Routing();
-        routing.RegisterPublisher(
-            typeof(ServiceControl.Contracts.MessageFailed).Assembly,
-            "Particular.ServiceControl"
-        );
 
         var conventions = endpointConfiguration.Conventions();
         conventions.DefiningEventsAs(
@@ -31,11 +25,10 @@ class Program
             });
 
 
-        var endpointInstance = await Endpoint.Start(endpointConfiguration)
-            .ConfigureAwait(false);
-        Console.WriteLine("Press any key to finish.");
-        Console.ReadKey();
-        await endpointInstance.Stop()
-            .ConfigureAwait(false);
+        using (var endpointInstance = Bus.Create(endpointConfiguration).Start())
+        {
+            Console.WriteLine("Press any key to finish.");
+            Console.ReadKey();
+        }
     }
 }

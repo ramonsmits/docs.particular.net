@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <PackageReference Include="NServiceBus" Version="6.*" />
-    <PackageReference Include="ServiceControl.Plugin.Nsb6.Heartbeat" Version="1.*" />
+    <PackageReference Include="NServiceBus" Version="5.*" />
+    <PackageReference Include="ServiceControl.Plugin.Nsb5.Heartbeat" Version="3.*" />
   </ItemGroup>
 </Project>

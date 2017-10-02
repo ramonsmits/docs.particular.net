@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using NServiceBus;
+﻿using NServiceBus;
 using NServiceBus.Logging;
 using ServiceControl.Contracts;
 
@@ -12,22 +11,19 @@ public class CustomEventsHandler :
 {
     static ILog log = LogManager.GetLogger<CustomEventsHandler>();
 
-    public Task Handle(MessageFailed message, IMessageHandlerContext context)
+    public void Handle(MessageFailed message)
     {
         log.Error("Received ServiceControl 'MessageFailed' event for a SimpleMessage.");
-        return Task.CompletedTask;
     }
 
-    public Task Handle(HeartbeatStopped message, IMessageHandlerContext context)
+    public void Handle(HeartbeatStopped message)
     {
         log.Warn($"Heartbeat from {message.EndpointName} stopped.");
-        return Task.CompletedTask;
     }
 
-    public Task Handle(HeartbeatRestored message, IMessageHandlerContext context)
+    public void Handle(HeartbeatRestored message)
     {
         log.Info($"Heartbeat from {message.EndpointName} restored.");
-        return Task.CompletedTask;
     }
 }
 
