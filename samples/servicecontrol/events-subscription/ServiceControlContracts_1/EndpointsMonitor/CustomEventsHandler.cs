@@ -13,7 +13,7 @@ public class CustomEventsHandler :
 
     public void Handle(MessageFailed message)
     {
-        log.Error("Received ServiceControl 'MessageFailed' event for a SimpleMessage.");
+        log.Error($"Received ServiceControl '{nameof(MessageFailed)}' event for a '{message.MessageType}' with ID '{message.FailedMessageId}'.");
     }
 
     public void Handle(HeartbeatStopped message)
