@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using NServiceBus;
+using NServiceBus.Hosting.Helpers;
+using ServiceControl.Contracts;
 
 class Program
 {
+    static IBus endpointInstance;
     static void Main()
     {
         Console.Title = "EndpointsMonitor";
@@ -25,10 +29,40 @@ class Program
             });
 
 
-        using (var endpointInstance = Bus.Create(endpointConfiguration).Start())
+        using (endpointInstance = Bus.Create(endpointConfiguration).Start())
         {
-            Console.WriteLine("Press any key to finish.");
-            Console.ReadKey();
+            while (true)
+            {
+                Console.WriteLine("Press ESC key to finish.\nS = Subscribe\nU = Unsubscribe");
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.Escape:
+                        return;
+                    case ConsoleKey.S:
+                        Subscribe();
+                        break;
+                    case ConsoleKey.U:
+                        Unsubscribe();
+                        break;
+                }
+            }
         }
+    }
+
+    static List<Type> types = new List<Type>()
+    {
+        typeof(MessageFailed),
+        typeof(HeartbeatStopped),
+        typeof(HeartbeatRestored)
+    };
+
+    static void Unsubscribe()
+    {
+        types.ForEach(t=>endpointInstance.Unsubscribe(t));
+    }
+
+    static void Subscribe()
+    {
+        types.ForEach(t => endpointInstance.Subscribe(t));
     }
 }
