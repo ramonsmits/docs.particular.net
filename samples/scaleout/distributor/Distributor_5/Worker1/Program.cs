@@ -1,22 +1,13 @@
 ﻿using System;
 using NServiceBus;
 
-class Program
+[EndpointName("Samples.Scaleout.Subscriber.Worker1")]
+class Program : IConfigureThisEndpoint
 {
-    static void Main()
+    public void Customize(BusConfiguration busConfiguration)
     {
         Console.Title = "Samples.Scaleout.Worker1";
-        #region Workerstartup
-        var busConfiguration = new BusConfiguration();
-        busConfiguration.EndpointName("Samples.Scaleout.Worker1");
-        busConfiguration.EnlistWithMSMQDistributor();
-        #endregion
         busConfiguration.UsePersistence<InMemoryPersistence>();
         busConfiguration.EnableInstallers();
-        using (var bus = Bus.Create(busConfiguration).Start())
-        {
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
-        }
     }
 }

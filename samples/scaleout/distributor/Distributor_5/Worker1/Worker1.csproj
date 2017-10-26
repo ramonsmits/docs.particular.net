@@ -2,13 +2,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net461</TargetFrameworks>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <LangVersion>7.1</LangVersion>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj" />
     <ProjectReference Include="..\Worker.Handlers\Worker.Handlers.csproj" />
     <PackageReference Include="NServiceBus" Version="5.*" />
     <PackageReference Include="NServiceBus.Distributor.MSMQ" Version="5.*" />
+    <PackageReference Include="NServiceBus.Host" Version="6.0.1" />
   </ItemGroup>
 </Project>

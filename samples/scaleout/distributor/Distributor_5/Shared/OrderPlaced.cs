@@ -2,7 +2,7 @@
 using System;
 
 public class OrderPlaced :
-    IMessage
+    IEvent
 {
     public Guid OrderId { get; set; }
     public string WorkerName { get; set; }

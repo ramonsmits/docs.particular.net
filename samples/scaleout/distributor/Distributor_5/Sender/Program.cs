@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using NServiceBus;
+using NServiceBus.Features;
+using NServiceBus.Persistence.Legacy;
 
 class Program
 {
     static void Main()
     {
-        Console.Title = "Samples.Scaleout.Sender";
+        Console.Title = "Samples.Scaleout.Publisher";
         var busConfiguration = new BusConfiguration();
-        busConfiguration.EndpointName("Samples.Scaleout.Sender");
+        busConfiguration.EndpointName("Samples.Scaleout.Publisher");
         busConfiguration.EnableInstallers();
-        busConfiguration.UsePersistence<InMemoryPersistence>();
+        busConfiguration.UsePersistence<MsmqPersistence>();
+        busConfiguration.DisableFeature<TimeoutManager>();
 
         using (var bus = Bus.Create(busConfiguration).Start())
         {
@@ -38,7 +43,7 @@ class Program
         {
             OrderId = Guid.NewGuid()
         };
-        bus.Send("Samples.Scaleout.Server", placeOrder);
+        bus.SendLocal(placeOrder);
         Console.WriteLine($"Sent PlacedOrder command with order id [{placeOrder.OrderId}].");
 
         #endregion

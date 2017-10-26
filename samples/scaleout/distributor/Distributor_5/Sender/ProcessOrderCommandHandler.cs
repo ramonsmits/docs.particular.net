@@ -25,8 +25,8 @@ public class ProcessOrderCommandHandler :
             OrderId = placeOrder.OrderId,
             WorkerName = Assembly.GetEntryAssembly().GetName().Name
         };
-        bus.Reply(message);
-        log.Info($"Sent Order placed event for orderId [{placeOrder.OrderId}].");
+        bus.Publish(message);
+        log.Info($"Published Order placed event for orderId [{placeOrder.OrderId}].");
     }
 }
 

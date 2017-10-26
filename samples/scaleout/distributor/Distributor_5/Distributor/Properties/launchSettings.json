@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Server": {
+      "commandName": "Executable",
+      "executablePath": "S:\\particular\\docs.particular.net\\samples\\scaleout\\distributor\\Distributor_5\\Distributor\\bin\\Debug\\net461\\NServiceBus.Host.exe",
+      "commandLineArgs": "NServiceBus.MSMQDistributor"
+    }
+  }
+}
