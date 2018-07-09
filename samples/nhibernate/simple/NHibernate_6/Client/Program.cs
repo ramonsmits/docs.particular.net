@@ -1,5 +1,8 @@
 ﻿using System;
+using NHibernate.Cfg;
 using NServiceBus;
+using NServiceBus.Persistence;
+using Environment = NHibernate.Cfg.Environment;
 
 class Program
 {
@@ -10,6 +13,20 @@ class Program
 
         busConfiguration.EndpointName("Samples.NHibernate.Client");
         busConfiguration.EnableInstallers();
+
+
+        // Requires, otherwise it will use no schema and fail because it conflicts with  table in differen schema
+        var sagaConfig = new Configuration();
+        sagaConfig.SetProperty(Environment.ConnectionProvider, typeof(NHibernate.Connection.DriverConnectionProvider).FullName);
+        sagaConfig.SetProperty(Environment.ConnectionDriver, typeof(NHibernate.Driver.Sql2008ClientDriver).FullName);
+        sagaConfig.SetProperty(Environment.Dialect, typeof(NHibernate.Dialect.MsSql2012Dialect).FullName);
+        sagaConfig.SetProperty(Environment.ConnectionString, "Data Source=.;Database=Samples.NHibernate;Integrated Security=True;App=Saga");
+        sagaConfig.SetProperty(Environment.DefaultSchema, "client");
+
+        var persistence = busConfiguration.UsePersistence<NHibernatePersistence>();
+        persistence.UseConfiguration(sagaConfig);
+
+
         busConfiguration.UsePersistence<NHibernatePersistence>();
 
         var bus = Bus.Create(busConfiguration).Start();

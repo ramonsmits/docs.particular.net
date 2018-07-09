@@ -3,6 +3,7 @@ using NHibernate.Cfg;
 using NHibernate.Mapping.ByCode;
 using NServiceBus;
 using NServiceBus.Persistence;
+using NServiceBus.Persistence.NHibernate;
 using Environment = NHibernate.Cfg.Environment;
 
 class Program
@@ -17,16 +18,24 @@ class Program
         busConfiguration.EndpointName("Samples.NHibernate.Server");
 
         var persistence = busConfiguration.UsePersistence<NHibernatePersistence>();
-        var nhConfig = new Configuration();
+        var sagaConfig = new Configuration();
+        sagaConfig.SetProperty(Environment.ConnectionProvider, typeof(NHibernate.Connection.DriverConnectionProvider).FullName);
+        sagaConfig.SetProperty(Environment.ConnectionDriver, typeof(NHibernate.Driver.Sql2008ClientDriver).FullName);
+        sagaConfig.SetProperty(Environment.Dialect, typeof(NHibernate.Dialect.MsSql2012Dialect).FullName);
+        sagaConfig.SetProperty(Environment.ConnectionString, "Data Source=.;Database=Samples.NHibernate;Integrated Security=True;App=Saga");
+        sagaConfig.SetProperty(Environment.DefaultSchema, "saga");
 
-        nhConfig.SetProperty(Environment.ConnectionProvider, "NHibernate.Connection.DriverConnectionProvider");
-        nhConfig.SetProperty(Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
-        nhConfig.SetProperty(Environment.Dialect, "NHibernate.Dialect.MsSql2008Dialect");
-        nhConfig.SetProperty(Environment.ConnectionStringName, "NServiceBus/Persistence");
+        AddMappings(sagaConfig);
+        persistence.UseConfiguration(sagaConfig).RegisterManagedSessionInTheContainer();
 
-        AddMappings(nhConfig);
+        var timeoutConfig = new Configuration();
+        timeoutConfig.SetProperty(Environment.ConnectionProvider, typeof(NHibernate.Connection.DriverConnectionProvider).FullName);
+        timeoutConfig.SetProperty(Environment.ConnectionDriver, typeof(NHibernate.Driver.Sql2008ClientDriver).FullName);
+        timeoutConfig.SetProperty(Environment.Dialect, typeof(NHibernate.Dialect.MsSql2012Dialect).FullName);
+        timeoutConfig.SetProperty(Environment.ConnectionString, "Data Source=.;Database=Samples.NHibernate;Integrated Security=True;App=Timeout");
+        timeoutConfig.SetProperty(Environment.DefaultSchema, "timeout");
 
-        persistence.UseConfiguration(nhConfig).RegisterManagedSessionInTheContainer();
+        persistence.UseTimeoutStorageConfiguration(timeoutConfig);
 
         #endregion
 
@@ -43,7 +52,7 @@ class Program
     static void AddMappings(Configuration nhConfiguration)
     {
         var mapper = new ModelMapper();
-        mapper.AddMappings(typeof (OrderShipped).Assembly.GetTypes());
+        mapper.AddMappings(typeof(OrderShipped).Assembly.GetTypes());
         nhConfiguration.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
     }
 }
