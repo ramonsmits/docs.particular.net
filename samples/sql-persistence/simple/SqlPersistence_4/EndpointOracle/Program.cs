@@ -15,18 +15,19 @@ internal class Program
         var endpointConfiguration = new EndpointConfiguration("EndpointOracle");
 
         var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
-        var password = Environment.GetEnvironmentVariable("OraclePassword");
+        var password = "mytest";
         if (string.IsNullOrWhiteSpace(password))
         {
             throw new Exception("Could not extract 'OraclePassword' from Environment variables.");
         }
-        var username = Environment.GetEnvironmentVariable("OracleUserName");
+
+        var username = "mytest";
         if (string.IsNullOrWhiteSpace(username))
         {
             throw new Exception("Could not extract 'OracleUserName' from Environment variables.");
         }
         var connection = $"Data Source=localhost;User Id={username}; Password={password}; Enlist=false";
-        persistence.SqlDialect < SqlDialect.Oracle>();
+        persistence.SqlDialect<SqlDialect.Oracle>();
         persistence.ConnectionBuilder(
             connectionBuilder: () =>
             {
@@ -39,6 +40,7 @@ internal class Program
 
         endpointConfiguration.UseTransport<LearningTransport>();
         endpointConfiguration.EnableInstallers();
+        endpointConfiguration.EnableOutbox();
 
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
