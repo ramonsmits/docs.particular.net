@@ -6,9 +6,9 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.Core.csproj" />
-    <PackageReference Include="Iesi.Collections" Version="4.*" />
-    <PackageReference Include="NHibernate" Version="5.*" />
-    <PackageReference Include="NServiceBus.NHibernate" Version="8.*" />
+    <PackageReference Include="Iesi.Collections" Version="4.0.4" />
+    <PackageReference Include="NHibernate" Version="5.1.3" />
+    <PackageReference Include="NServiceBus.NHibernate" Version="8.1.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
   </ItemGroup>
 </Project>

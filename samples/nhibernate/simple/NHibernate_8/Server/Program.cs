@@ -18,9 +18,9 @@ class Program
         var persistence = endpointConfiguration.UsePersistence<NHibernatePersistence>();
 
         var nhConfig = new Configuration();
-        nhConfig.SetProperty(Environment.ConnectionProvider, "NHibernate.Connection.DriverConnectionProvider");
-        nhConfig.SetProperty(Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
-        nhConfig.SetProperty(Environment.Dialect, "NHibernate.Dialect.MsSql2008Dialect");
+        nhConfig.SetProperty(Environment.ConnectionProvider, typeof(NHibernate.Connection.DriverConnectionProvider).FullName);
+        nhConfig.SetProperty(Environment.ConnectionDriver, typeof(NHibernate.Driver.Sql2008ClientDriver).FullName);
+        nhConfig.SetProperty(Environment.Dialect, typeof(NHibernate.Dialect.MsSql2012Dialect).FullName);
         nhConfig.SetProperty(Environment.ConnectionStringName, "NServiceBus/Persistence");
 
         AddMappings(nhConfig);
