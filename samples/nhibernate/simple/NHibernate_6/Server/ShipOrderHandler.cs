@@ -7,9 +7,18 @@ public class ShipOrderHandler :
     IHandleMessages<ShipOrder>
 {
     ISession session;
+    public IBus Bus { get; set; }
 
     public void Handle(ShipOrder message)
     {
+        if (!message.Defer)
+        {
+            message.Defer = true;
+            Bus.Defer(TimeSpan.FromMinutes(5), message);
+            return;
+        }
+
+        
         var orderShipped = new OrderShipped
         {
             Id = message.OrderId,

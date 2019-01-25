@@ -10,4 +10,7 @@
     <PackageReference Include="NHibernate" Version="4.*" />
     <PackageReference Include="NServiceBus.NHibernate" Version="6.*" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
 </Project>

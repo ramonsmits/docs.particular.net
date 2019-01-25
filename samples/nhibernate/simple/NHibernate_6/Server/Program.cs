@@ -1,5 +1,6 @@
 ﻿using System;
 using NHibernate.Cfg;
+using NHibernate.Dialect;
 using NHibernate.Mapping.ByCode;
 using NServiceBus;
 using NServiceBus.Persistence;
@@ -21,8 +22,16 @@ class Program
 
         nhConfig.SetProperty(Environment.ConnectionProvider, "NHibernate.Connection.DriverConnectionProvider");
         nhConfig.SetProperty(Environment.ConnectionDriver, "NHibernate.Driver.Sql2008ClientDriver");
-        nhConfig.SetProperty(Environment.Dialect, "NHibernate.Dialect.MsSql2008Dialect");
-        nhConfig.SetProperty(Environment.ConnectionStringName, "NServiceBus/Persistence");
+        //nhConfig.SetProperty(Environment.Dialect, "NHibernate.Dialect.MsSql2008Dialect");
+        //nhConfig.SetProperty(Environment.ConnectionStringName, "NServiceBus/Persistence");
+        //nhConfig.SetProperty(Environment.ConnectionProvider, )
+        nhConfig.DataBaseIntegration(x =>
+        {
+            x.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["NServiceBus/Persistence"].ConnectionString;
+            x.Dialect<MsSql2012Dialect>();
+            x.ConnectionProvider<CustomDriverConnectionProvider>();
+        });
+
 
         AddMappings(nhConfig);
 
@@ -46,4 +55,40 @@ class Program
         mapper.AddMappings(typeof (OrderShipped).Assembly.GetTypes());
         nhConfiguration.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
     }
+}
+
+public class CustomDriverConnectionProvider : NHibernate.Connection.DriverConnectionProvider
+
+{
+
+    public override System.Data.IDbConnection GetConnection()
+
+    {
+
+        var conn = base.GetConnection();
+
+        DisableNoCount(conn);
+
+        return conn;
+
+    }
+
+ 
+
+    private void DisableNoCount(System.Data.IDbConnection connection)
+
+    {
+
+        using (var command = connection.CreateCommand())
+
+        {
+
+            command.CommandText = "SET NOCOUNT OFF";
+
+            command.ExecuteNonQuery();
+
+        }
+
+    }
+
 }
