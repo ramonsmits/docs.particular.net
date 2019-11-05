@@ -1,16 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <OutputType>Exe</OutputType>
     <LangVersion>7.1</LangVersion>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="NServiceBus.Azure.Transports.WindowsAzureServiceBus" Version="9.*" />
+    <PackageReference Include="NServiceBus.Metrics.ServiceControl" Version="3.*" />
     <PackageReference Include="NServiceBus.Transport.AzureServiceBus" Version="1.*" />
   </ItemGroup>
   <ItemGroup Label="Transitive dependencies">
     <PackageReference Include="Microsoft.Azure.ServiceBus" Version="3.*" />
   </ItemGroup>
+  
+  <Target Name="ChangeAliasesOfNugetRefs" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
+    <ItemGroup>
+      <ReferencePath Condition="'%(FileName)' == 'NServiceBus.Transport.AzureServiceBus'">
+        <Aliases>slow</Aliases>
+      </ReferencePath>
+      <ReferencePath Condition="'%(FileName)' == 'NServiceBus.Azure.Transports.WindowsAzureServiceBus'">
+        <Aliases>fast</Aliases>
+      </ReferencePath>
+    </ItemGroup>
+  </Target>
+
 </Project>

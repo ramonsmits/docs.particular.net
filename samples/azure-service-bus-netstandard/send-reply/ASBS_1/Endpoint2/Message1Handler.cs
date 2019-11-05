@@ -9,12 +9,13 @@ public class Message1Handler :
 
     public Task Handle(Message1 message, IMessageHandlerContext context)
     {
-        log.Info($"Received Message1: {message.Property}");
+        //log.Info($"Received Message1: {message.Property}");
 
         var message2 = new Message2
         {
             Property = "Hello from Endpoint2"
         };
-        return context.Reply(message2);
+        //return context.Reply(message2);
+        return Task.CompletedTask; // Only ingestion
     }
 }
