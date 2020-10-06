@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using NServiceBus;
+using NServiceBus.UniformSession;
 
 static class Program
 {
@@ -11,11 +12,12 @@ static class Program
 
         var endpointConfiguration = new EndpointConfiguration("Sample");
         endpointConfiguration.UseTransport<LearningTransport>();
+        endpointConfiguration.EnableUniformSession();
 
         #region ContainerConfiguration
 
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<MyService>();
+        serviceCollection.AddTransient<ReusedComponent>();
         serviceCollection.AddSingleton<MessageSenderService>();
 
         var endpointWithExternallyManagedServiceProvider = EndpointWithExternallyManagedServiceProvider
@@ -36,6 +38,7 @@ static class Program
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
+
             await endpoint.Stop()
                 .ConfigureAwait(false);
         }

@@ -1,19 +1,32 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using NServiceBus;
 #region InjectingDependency
-public class MyHandler :
+class MyHandler :
     IHandleMessages<MyMessage>
 {
-    MyService myService;
+    ReusedComponent myService;
 
-    public MyHandler(MyService myService)
+    public MyHandler(ReusedComponent myService)
     {
         this.myService = myService;
     }
 
     public Task Handle(MyMessage message, IMessageHandlerContext context)
     {
-        myService.WriteHello();
+        //var timestamp = DateTimeExtensions.ToUtcDateTime(context.MessageHeaders[Headers.TimeSent]);
+
+        //var age = DateTime.UtcNow - timestamp;
+
+        //Console.WriteLine($"Age: {age}");
+
+        //if (age > TimeSpan.FromSeconds(10))
+        //{
+        //    Console.WriteLine($"Too old {context.MessageId}");
+        //    return Task.CompletedTask;
+        //}
+
+        myService.Do();
         return Task.CompletedTask;
     }
 }

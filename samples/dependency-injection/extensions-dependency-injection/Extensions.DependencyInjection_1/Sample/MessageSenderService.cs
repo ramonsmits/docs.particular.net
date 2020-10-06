@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using NServiceBus;
+using NServiceBus.UniformSession;
 
 #region InjectingMessageSession
 public class MessageSenderService
 {
-    private readonly IMessageSession messageSession;
+    private readonly IUniformSession messageSession;
 
-    public MessageSenderService(IMessageSession messageSession)
+    public MessageSenderService(IUniformSession messageSession)
     {
         this.messageSession = messageSession;
     }
