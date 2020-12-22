@@ -9,6 +9,6 @@ public class MyCommandHandler : IHandleMessages<MyCommand>
     public Task Handle(MyCommand commandMessage, IMessageHandlerContext context)
     {
         log.Info($"Hello from {nameof(MyCommandHandler)}");
-        return Task.CompletedTask;
+        return Task.Delay(5000);
     }
 }

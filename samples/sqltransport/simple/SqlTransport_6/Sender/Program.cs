@@ -13,7 +13,8 @@ class Program
         #region TransportConfiguration
 
         var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
-        var connection = @"Data Source=.\SqlExpress;Database=SqlServerSimple;Integrated Security=True;Max Pool Size=100";
+        transport.TimeToWaitBeforeTriggeringCircuitBreaker(TimeSpan.FromSeconds(15));
+        var connection = @"Data Source=.;Database=SqlServerSimple;Integrated Security=True;Max Pool Size=100";
         transport.ConnectionString(connection);
         transport.Routing().RouteToEndpoint(typeof(MyCommand), "Samples.SqlServer.SimpleReceiver");
 
@@ -21,7 +22,7 @@ class Program
 
         transport.Transactions(TransportTransactionMode.SendsAtomicWithReceive);
 
-        SqlHelper.EnsureDatabaseExists(connection);
+        //SqlHelper.EnsureDatabaseExists(connection);
         var endpointInstance = await Endpoint.Start(endpointConfiguration)
             .ConfigureAwait(false);
         await SendMessages(endpointInstance);
