@@ -8,6 +8,10 @@ class Program
     {
         Console.Title = "Samples.SqlServer.SimpleReceiver";
         var endpointConfiguration = new EndpointConfiguration("Samples.SqlServer.SimpleReceiver");
+        
+        var performanceCounters = endpointConfiguration.EnableWindowsPerformanceCounters();
+        performanceCounters.EnableSLAPerformanceCounters(TimeSpan.FromSeconds(100));
+        
         var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
         var connection = @"Data Source=.;Database=SqlServerSimple;Integrated Security=True;Max Pool Size=100";
         transport.ConnectionString(connection);

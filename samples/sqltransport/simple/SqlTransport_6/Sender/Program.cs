@@ -8,6 +8,10 @@ class Program
     {
         Console.Title = "Samples.SqlServer.SimpleSender";
         var endpointConfiguration = new EndpointConfiguration("Samples.SqlServer.SimpleSender");
+
+        var performanceCounters = endpointConfiguration.EnableWindowsPerformanceCounters();
+        performanceCounters.EnableSLAPerformanceCounters(TimeSpan.FromSeconds(100));
+
         endpointConfiguration.EnableInstallers();
 
         #region TransportConfiguration
