@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
 using NServiceBus;
 
@@ -6,8 +8,11 @@ class Program
 {
     static async Task Main()
     {
-        Console.Title = "Samples.PerfCounters";
-        var endpointConfiguration = new EndpointConfiguration("Samples.PerfCounters");
+        AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+        var suffix = Thread.CurrentPrincipal.Identity.Name.Split('\\')[1];
+
+        Console.Title = "Samples.PerfCounters." + suffix;
+        var endpointConfiguration = new EndpointConfiguration("Samples.PerfCounters." + suffix);
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.UseTransport<LearningTransport>();
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
