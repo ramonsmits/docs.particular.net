@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using NServiceBus;
@@ -7,10 +8,13 @@ class Program
 {
     static async Task Main()
     {
+        await Console.Out.WriteLineAsync($"PerformanceCounterCategory.Exists: {PerformanceCounterCategory.Exists("NServiceBus")}");
+        await Console.Out.WriteLineAsync($"PerformanceCounterCategory.CounterExists: {PerformanceCounterCategory.CounterExists("SLA violation countdown", "NServiceBus")}");
+
         await Console.Out.WriteLineAsync($"Environment.Version: {Environment.Version}");
         await Console.Out.WriteLineAsync($"Environment.OSVersion: {Environment.OSVersion}");
         await Console.Out.WriteLineAsync($"RuntimeInformation.FrameworkDescription: {RuntimeInformation.FrameworkDescription}");
-        
+
         var endpointConfiguration = new EndpointConfiguration("Samples.SqlServer.SimpleSender");
 
         var performanceCounters = endpointConfiguration.EnableWindowsPerformanceCounters();
