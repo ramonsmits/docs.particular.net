@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using NServiceBus;
 
@@ -6,7 +7,10 @@ class Program
 {
     static async Task Main()
     {
-        Console.Title = "Samples.SqlServer.SimpleSender";
+        await Console.Out.WriteLineAsync($"Environment.Version: {Environment.Version}");
+        await Console.Out.WriteLineAsync($"Environment.OSVersion: {Environment.OSVersion}");
+        await Console.Out.WriteLineAsync($"RuntimeInformation.FrameworkDescription: {RuntimeInformation.FrameworkDescription}");
+        
         var endpointConfiguration = new EndpointConfiguration("Samples.SqlServer.SimpleSender");
 
         var performanceCounters = endpointConfiguration.EnableWindowsPerformanceCounters();
