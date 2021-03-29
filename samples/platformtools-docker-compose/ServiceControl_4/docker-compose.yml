@@ -8,17 +8,18 @@ volumes:
 services:
 
   error:
-    image: particular/servicecontrol.azureservicebus-windows:4
+    image: particular/servicecontrol.azureservicebus-windows:latest
     ports:
       - 33333:33333
     volumes:
       - error:c:/data
       - ${PROGRAMDATA}/ParticularSoftware:C:/ProgramData/ParticularSoftware
     env_file: .env
+    mem_limit: 8192m
     restart: unless-stopped
 
   monitoring:
-    image: particular/servicecontrol.azureservicebus.monitoring-windows:4
+    image: particular/servicecontrol.azureservicebus.monitoring-windows:latest
     ports:
       - 33633:33633
     volumes:
@@ -27,13 +28,14 @@ services:
     restart: unless-stopped
 
   audit:
-    image: particular/servicecontrol.azureservicebus.audit-windows:4
+    image: particular/servicecontrol.azureservicebus.audit-windows:latest
     ports:
       - 44444:44444
     volumes:
       - audit:c:/data
       - ${PROGRAMDATA}/ParticularSoftware:C:/ProgramData/ParticularSoftware
     env_file: .env
+    mem_limit: 8192m
     restart: unless-stopped
 
   pulse:
