@@ -11,7 +11,7 @@ class Program
         endpointConfiguration.EnableInstallers();
 
         #region TransportConfiguration
-        var connection = @"Data Source=.\SqlExpress;Database=SqlServerSimple;Integrated Security=True;Max Pool Size=100";
+        var connection = @"Data Source=.;Database=SqlServerSimple;Integrated Security=True;Max Pool Size=100";
         var routing = endpointConfiguration.UseTransport(new SqlServerTransport(connection)
         {
             TransportTransactionMode = TransportTransactionMode.SendsAtomicWithReceive

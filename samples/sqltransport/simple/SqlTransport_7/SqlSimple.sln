@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receiver", "Receiver\Receiv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{BF92D39E-42F6-44E9-8F7F-819993235621}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{6F3370CE-40CE-482B-8800-CFD4A39B8105}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{0CD0FE3D-C445-4649-9323-424A939E0BD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,10 @@ Global
 		{1EEC6A8C-DB3C-4F20-93CE-5004BF16AD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF92D39E-42F6-44E9-8F7F-819993235621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF92D39E-42F6-44E9-8F7F-819993235621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F3370CE-40CE-482B-8800-CFD4A39B8105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F3370CE-40CE-482B-8800-CFD4A39B8105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CD0FE3D-C445-4649-9323-424A939E0BD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CD0FE3D-C445-4649-9323-424A939E0BD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

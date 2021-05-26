@@ -2,14 +2,14 @@ using System;
 using System.Threading.Tasks;
 using NServiceBus;
 
-class Program
+public class Program
 {
-    static async Task Main()
+    public static async Task Main()
     {
         Console.Title = "Samples.SqlServer.SimpleReceiver";
         var endpointConfiguration = new EndpointConfiguration("Samples.SqlServer.SimpleReceiver");
 
-        var connection = @"Data Source=.\SqlExpress;Database=SqlServerSimple;Integrated Security=True;Max Pool Size=100";
+        var connection = @"Data Source=.;Database=SqlServerSimple;Integrated Security=True;Max Pool Size=100";
 
         endpointConfiguration.UseTransport(new SqlServerTransport(connection)
         {
