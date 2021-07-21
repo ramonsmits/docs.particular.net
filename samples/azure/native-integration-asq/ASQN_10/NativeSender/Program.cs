@@ -36,7 +36,16 @@ class Program
 
             #endregion
 
-            Console.WriteLine("Message sent");
+            Console.WriteLine("NativeMessage sent");
+
+            var msg2 = new NativeMessage2
+            {
+                Property = $"Hello from native sender @ {DateTimeOffset.Now}"
+            };
+
+            await queueClient.SendMessageAsync(JsonConvert.SerializeObject(msg2)).ConfigureAwait(false);
+
+            Console.WriteLine("NativeMessage2 sent");
         }
     }
 }
