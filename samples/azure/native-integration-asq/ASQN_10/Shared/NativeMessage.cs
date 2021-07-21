@@ -1,6 +1,6 @@
 using NServiceBus;
 
-public class NativeMessage : IMessage
+public class NativeMessage : ICommand
 {
     public string Content { get; set; }
 }
