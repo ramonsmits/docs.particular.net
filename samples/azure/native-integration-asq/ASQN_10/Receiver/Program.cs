@@ -23,14 +23,35 @@ class Program
 
         #region Native-message-mapping
 
-        transport.UnwrapMessagesWith(message => new MessageWrapper
+        transport.UnwrapMessagesWith(message =>
         {
-            Id = message.MessageId,
-            Body = message.Body.ToArray(),
-            Headers = new Dictionary<string, string>
+            var wrapper =  new MessageWrapper
             {
-                { Headers.EnclosedMessageTypes, typeof(NativeMessage).FullName }
+                Id = message.MessageId,
+                Body = message.Body.ToArray(),
+                Headers = new Dictionary<string, string>()
+            };
+
+            string enclosedMessageTypes;
+
+            if(message.MessageText.Contains("Property"))
+            {
+                enclosedMessageTypes = typeof(NativeMessage2).FullName;
             }
+            else if(message.MessageText.Contains("Content"))
+            {
+                enclosedMessageTypes = typeof(NativeMessage).FullName;
+            }
+            else
+            {
+                throw new NotSupportedException("Incoming message type could not be resolved");
+            }
+
+            Console.WriteLine("Incoming message type is: " + enclosedMessageTypes);
+
+            wrapper.Headers[Headers.EnclosedMessageTypes] = enclosedMessageTypes;
+
+            return wrapper;
         });
 
         #endregion
